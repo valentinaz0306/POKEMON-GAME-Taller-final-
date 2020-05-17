@@ -54,15 +54,9 @@ public class Main extends PApplet {
 		cp5 = new ControlP5(this);
 
 		// campo de texto para usuario
-		username = cp5.addTextfield("Nombre")
-				.setPosition(115, 343)
-				.setSize(180, 38)
-				.setFont(font)
-				.setColor(color(255, 255, 255))
-				.setColorBackground(0)
-				.setColorActive(0).setColorLabel(0)
-				.setColorCaptionLabel(0)
-				.setColorForeground(0);
+		username = cp5.addTextfield("Nombre").setPosition(115, 343).setSize(180, 38).setFont(font)
+				.setColor(color(255, 255, 255)).setColorBackground(0).setColorActive(0).setColorLabel(0)
+				.setColorCaptionLabel(0).setColorForeground(0);
 
 	}
 
@@ -79,18 +73,11 @@ public class Main extends PApplet {
 		case 1:
 			background(0);
 			image(start, 0, 0);
-			username.hide();
 
 
 			break;
 
 		}// cierre switch
-
-	}
-	
-	public void mousePressed() {
-		
-		pantalla ++;
 
 	}
 

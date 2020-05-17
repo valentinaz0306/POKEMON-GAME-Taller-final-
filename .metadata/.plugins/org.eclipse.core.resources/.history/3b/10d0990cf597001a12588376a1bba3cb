@@ -8,7 +8,7 @@ public class Jugador {
 	private int py;
 	
 	
-	public Jugador(String username) {
+	public Jugador(String username,String fecha, int px,int py) {
 		this.username = username;
 		this.fecha = fecha;
 		this.px = px;

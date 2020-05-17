@@ -3,14 +3,14 @@ package model;
 public class Jugador {
 
 	private String username;
-	private String fecha;
+	//private String fecha;
 	private int px;
 	private int py;
 	
 	
 	public Jugador(String username) {
 		this.username = username;
-		this.fecha = fecha;
+		//this.fecha = fecha;
 		this.px = px;
 		this.py = py;
 	
