@@ -11,7 +11,11 @@ import java.util.ArrayList;
 public class Logica {
 	// arralist para registar usuarios
 	private ArrayList<Jugador> users;
+	private int fila=7;
+	private int col=12;
+	private int [][] mapa;
 
+	mapa = new int [col][fila];
 	public Logica() {
 
 		loadUsers();
@@ -39,12 +43,14 @@ public class Logica {
 			System.out.println(users.get(i).getUsername() + " Fecha:" + users.get(i).getDate().getTime());
 		}
 		System.out.println(users.size());
-		//System.out.println("despues de ordenar");
-		//ordenarNombre();
+		// System.out.println("despues de ordenar");
+		// ordenarNombre();
 
-		/*for (int i = 0; i < users.size(); i++) {
-			System.out.println(users.get(i).getUsername() + " Fecha:" + users.get(i).getDate().getTime());
-		}*/
+		/*
+		 * for (int i = 0; i < users.size(); i++) {
+		 * System.out.println(users.get(i).getUsername() + " Fecha:" +
+		 * users.get(i).getDate().getTime()); }
+		 */
 	}
 
 	public String[] guardarTxt() {
@@ -78,22 +84,21 @@ public class Logica {
 				e.printStackTrace();
 			}
 		}
-		
-		
+
 	}
 
 	public void saveUsers() {
 
 		try {
 
-            ObjectOutputStream io = new ObjectOutputStream(new FileOutputStream(new File("data/Usuarios.dat")));
-            io.writeObject(users);
-            io.close();
+			ObjectOutputStream io = new ObjectOutputStream(new FileOutputStream(new File("data/Usuarios.dat")));
+			io.writeObject(users);
+			io.close();
 
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	////
@@ -104,5 +109,32 @@ public class Logica {
 	public void setUsers(ArrayList<Jugador> users) {
 		this.users = users;
 	}
+	
+	
+	public void mapmatriz() {
+		for (int i = 0; i < col; i++) {
+			for (int j = 0; j < fila; j++) {
+				mapa[i][j]=0;
+			}
+	}
+		
+		mapa[3][1]=1;
+		mapa[4][1]=1;
+		mapa[9][1]=1;
+		mapa[3][2]=1;
+		mapa[4][2]=1;
+		mapa[5][2]=1;
+		mapa[6][2]=1;
+		mapa[7][2]=1;
+		mapa[8][2]=1;
+		mapa[9][2]=1;
+		mapa[10][2]=1;
+		mapa[11][2]=1;
+		mapa[12][2]=1;
+		
+	
+	
+	
 
+}
 }
