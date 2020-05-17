@@ -23,10 +23,16 @@ public class Main extends PApplet {
 	// Image variables
 	PImage start;
 	PImage logo;
+	PImage map;
+	PImage mapshadows;
+	PImage mapobject;
+	PImage bg1;
+	PImage dim;
 
 	// Int variables
 
 	int pantalla;
+	int T;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -42,9 +48,15 @@ public class Main extends PApplet {
 		// Load images
 		start = loadImage("image/start.png");
 		logo = loadImage("image/logo.png");
+		map = loadImage("image/map.png");
+		mapshadows = loadImage("image/mapshadows.png");
+		mapobject = loadImage("image/mapobject.png");
+		dim = loadImage("image/dim.png");
+		bg1 = loadImage("image/bg1.png");
 
 		// Load int variables
 		pantalla = 0;
+		
 
 		/// usuarios
 
@@ -55,7 +67,7 @@ public class Main extends PApplet {
 
 		// campo de texto para usuario
 		username = cp5.addTextfield("Nombre")
-				.setPosition(115, 343)
+				.setPosition(481, 287)
 				.setSize(180, 38)
 				.setFont(font)
 				.setColor(color(255, 255, 255))
@@ -67,31 +79,70 @@ public class Main extends PApplet {
 	}
 
 	public void draw() {
+		
+		
+		
+	
 
 		switch (pantalla) {
 
 		case 0:
-			background(0);
+			
 			image(start, 0, 0);
 			image(logo, 0, 0);
-			break;
-
-		case 1:
-			background(0);
-			image(start, 0, 0);
 			username.hide();
+			textSize(25);
+			text("Press Enter to continue",125,470);
+			
+		
+			
+			break;
+	
+			
+		case 1:
+			
+			image(start, 0, 0);
+			image(dim,0,0);
+			username.show();
+			textSize(50);
+			text("Set a nickname",400,150);
+			textSize(25);
+			text("Press Enter to continue",440,650);
+			
 
 
 			break;
+			
+			
+		case 2: 
+			image(map,0,0);
+			image(mapshadows,0,0);
+			image(mapobject,0,0);
+			username.hide();
 
 		}// cierre switch
 
+		fill(255);
+		text("X:"+ mouseX + "Y:" + mouseY,mouseX,mouseY);
+		
+		
+		
+		
 	}
 	
 	public void mousePressed() {
 		
-		pantalla ++;
+
 
 	}
+	
+	
+	public void keyPressed() {
+		if(key==ENTER) {
+			pantalla++;
+		}
+	}
 
+	
+	
 }// cierra main
