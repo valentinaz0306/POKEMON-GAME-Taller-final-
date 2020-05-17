@@ -5,6 +5,7 @@ import processing.core.PImage;
 import processing.core.PFont;
 import controlP5.*;
 import model.Jugador;
+import model.Logica;
 
 import java.util.ArrayList;
 
@@ -12,8 +13,7 @@ public class Main extends PApplet {
 
 	private ControlP5 cp5;
 
-	// arralist para registar usuarios
-	private ArrayList<Jugador> Users = new ArrayList<Jugador>();
+	private Logica logica;
 
 	////
 	String info = "";
@@ -45,6 +45,8 @@ public class Main extends PApplet {
 	}
 
 	public void setup() {
+
+		logica = new Logica();
 		// Load images
 		start = loadImage("image/start.png");
 		logo = loadImage("image/logo.png");
@@ -56,93 +58,100 @@ public class Main extends PApplet {
 
 		// Load int variables
 		pantalla = 0;
-		
 
 		/// usuarios
 
 		// SE AÑADE UN NUEVO USUARIO AL ARRAYLIST
-		Users.add(new Jugador("test"));
 		PFont font = createFont("PT Sans", 20);
 		cp5 = new ControlP5(this);
 
 		// campo de texto para usuario
-		username = cp5.addTextfield("Nombre")
-				.setPosition(481, 287)
-				.setSize(180, 38)
-				.setFont(font)
-				.setColor(color(255, 255, 255))
-				.setColorBackground(0)
-				.setColorActive(0).setColorLabel(0)
-				.setColorCaptionLabel(0)
-				.setColorForeground(0);
+		username = cp5.addTextfield("Nombre").setPosition(481, 287).setSize(180, 38).setFont(font)
+				.setColor(color(255, 255, 255)).setColorBackground(0).setColorActive(0).setColorLabel(0)
+				.setColorCaptionLabel(0).setColorForeground(0);
 
 	}
 
 	public void draw() {
-		
-		
-		
-	
 
 		switch (pantalla) {
 
 		case 0:
-			
+
 			image(start, 0, 0);
 			image(logo, 0, 0);
 			username.hide();
 			textSize(25);
-			text("Press Enter to continue",125,470);
-			
-		
-			
+			text("Press Enter to continue", 125, 470);
+
 			break;
-	
-			
+
 		case 1:
-			
+
 			image(start, 0, 0);
-			image(dim,0,0);
+			image(dim, 0, 0);
 			username.show();
 			textSize(50);
-			text("Set a nickname",400,150);
+			text("Set a nickname", 400, 150);
 			textSize(25);
-			text("Press Enter to continue",440,650);
-			
-
+			text("Press Enter to continue", 440, 650);
 
 			break;
-			
-			
-		case 2: 
-			image(map,0,0);
-			image(mapshadows,0,0);
-			image(mapobject,0,0);
+
+		case 2:
+			image(map, 0, 0);
+			image(mapshadows, 0, 0);
+			image(mapobject, 0, 0);
 			username.hide();
+
+			break;
 
 		}// cierre switch
 
 		fill(255);
-		text("X:"+ mouseX + "Y:" + mouseY,mouseX,mouseY);
-		
-		
-		
-		
+		text("X:" + mouseX + "Y:" + mouseY, mouseX, mouseY);
+
 	}
-	
+
 	public void mousePressed() {
-		
-
 
 	}
-	
-	
+
 	public void keyPressed() {
-		if(key==ENTER) {
+		if (key == ENTER) {
+
+			if (pantalla == 1) {
+
+				logica.addUsuario(username.getText());
+
+			}
 			pantalla++;
 		}
-	}
 
-	
-	
+		if (key == 'a') {
+
+			saveStrings("data/reporte.txt", logica.guardarTxt());
+		}
+
+		if (key == 's') {
+
+			logica.probar();
+		}
+
+		if (key == 'd') {
+
+			logica.ordenarFecha();
+		}
+		if (key == 'f') {
+
+			logica.ordenarNombre();
+		}
+		// cada vez que se quiera guardar de forma serializada el usuario debe undir g
+		if (key == 'g') {
+
+			logica.saveUsers();
+			
+		}
+	}// cierra key
+
 }// cierra main

@@ -1,0 +1,24 @@
+package model;
+
+import java.util.ArrayList;
+
+public class Logica {
+	// arralist para registar usuarios
+	private ArrayList<Jugador> users;
+
+	public Logica() {
+
+		users = new ArrayList<Jugador>();
+
+	}
+
+	public void addUsuario(String name) {
+		users.add(new Jugador(name));
+	}
+
+	public void ordenarNombre() {
+		
+		users.sort(new JugadorNombreCompare());
+	}
+
+}
