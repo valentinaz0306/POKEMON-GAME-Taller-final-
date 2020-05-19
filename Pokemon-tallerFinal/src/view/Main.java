@@ -28,11 +28,29 @@ public class Main extends PApplet {
 	PImage mapobject;
 	PImage bg1;
 	PImage dim;
-
+	PImage arrow;
+	PImage box;
+	PImage dialoguebox;
+	PImage fightmenu;
+	PImage fightbox;
+	PImage pokeballs;
+	PImage pokeselec;
+	PImage tuto;
+	PImage ch;
+	PImage p1;
+	PImage wpoke;
+	PImage gpoke;
+	PImage fpoke;
+	
 	// Int variables
 
 	int pantalla;
 	int T;
+	
+	// boolean
+	boolean fpk;
+	boolean gpk;
+	boolean wpk;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -55,9 +73,29 @@ public class Main extends PApplet {
 		mapobject = loadImage("image/mapobject.png");
 		dim = loadImage("image/dim.png");
 		bg1 = loadImage("image/bg1.png");
+		arrow = loadImage("image/arrow.png");
+		box = loadImage("image/box.png");
+		dialoguebox = loadImage("image/dialoguebox.png");
+		fightmenu = loadImage("image/fightmenu.png");
+		fightbox = loadImage("image/fightbox.png");
+		pokeballs = loadImage("image/pokeballs.png");
+		pokeselec = loadImage("image/pokeselec.png");
+		tuto = loadImage("image/tuto.png");
+		ch=loadImage("image/ch.png");
+		p1=loadImage("image/p1.png");
+		fpoke=loadImage("image/fpoke.png");
+		gpoke=loadImage("image/gpoke.png");
+		wpoke=loadImage("image/wpoke.png");
 
 		// Load int variables
 		pantalla = 0;
+		
+		//load boolean variables
+		fpk=false;
+		gpk=false;
+		wpk=false;
+		
+		
 
 		/// usuarios
 
@@ -97,13 +135,54 @@ public class Main extends PApplet {
 			text("Press Enter to continue", 440, 650);
 
 			break;
-
+			
+			
 		case 2:
+
+			image(start, 0, 0);
+			image(dim, 0, 0);
+			username.hide();
+			image(tuto,0,0);
+		
+			/*textSize(50);
+			text("Set a nickname", 400, 150);
+			textSize(25);
+			text("Press Enter to continue", 440, 650);
+*/
+			break;
+			
+		case 3: 
+
+			image(bg1, 0, 0);
+			image(dim, 0, 0);
+			username.hide();
+			if(wpk==false&&gpk==false&&fpk==false) {
+				image(p1,0,0);
+			}
+			image(dialoguebox,0,50);
+			image(box,0,0);
+			hoverpokechoose();
+			image(pokeballs,0,0);
+			
+			
+			
+			break;
+
+		case 4:
 			image(map, 0, 0);
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
 			username.hide();
 
+			//logica.mapmatriz()
+			;
+			
+			
+			
+			
+			
+			
+			
 			break;
 
 		}// cierre switch
@@ -114,6 +193,25 @@ public class Main extends PApplet {
 	}
 
 	public void mousePressed() {
+		if((mouseX>565 && mouseX<648)&&(mouseY>237 && mouseY<307)) {
+			fpk=!fpk;
+			gpk=false;
+			wpk=false;
+		}
+		
+		if((mouseX>720 && mouseX<813)&&(mouseY>239 && mouseY<293)) {
+			gpk=!gpk;
+			fpk=false;
+			wpk=false;
+		
+		}
+		
+		if((mouseX>878 && mouseX<965)&&(mouseY>235 && mouseY<300)) {
+			wpk=!wpk;
+			gpk=false;
+			fpk=false;
+			
+		}
 
 	}
 
@@ -152,6 +250,52 @@ public class Main extends PApplet {
 			logica.saveUsers();
 			
 		}
-	}// cierra key
+		
+	}
+	// cierra key
 
+	public void keyCode() {
+		
+	}
+	
+	
+	
+	public void hoverpokechoose() {
+		
+		if((mouseX>565 && mouseX<648)&&(mouseY>237 && mouseY<307)) {
+			image(pokeselec,0,0);
+		}
+		
+		if((mouseX>720 && mouseX<813)&&(mouseY>239 && mouseY<293)) {
+			image(pokeselec,160,0);
+		}
+		
+		if((mouseX>878 && mouseX<965)&&(mouseY>235 && mouseY<300)) {
+			image(pokeselec,310,0);
+		}
+		
+		
+		if(fpk==true) {
+			image(fpoke,0,0);
+		}
+		
+		if(gpk==true) {
+			image(gpoke,0,0);
+		}
+		
+		if(wpk==true) {
+			image(wpoke,0,0);
+		}
+
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
 }// cierra main

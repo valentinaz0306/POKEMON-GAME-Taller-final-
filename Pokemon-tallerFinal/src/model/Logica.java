@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import processing.core.PApplet;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,13 +10,17 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Logica {
+	
+	PApplet app;
+	public int fila=7;
+	public int col=12;
+	public int mapa [][];
+	
+	
+ 
 	// arralist para registar usuarios
 	private ArrayList<Jugador> users;
-	private int fila=7;
-	private int col=12;
-	private int [][] mapa;
-
-	mapa = new int [col][fila];
+	
 	public Logica() {
 
 		loadUsers();
@@ -112,16 +117,9 @@ public class Logica {
 	
 	
 	public void mapmatriz() {
-		for (int i = 0; i < col; i++) {
-			for (int j = 0; j < fila; j++) {
-				mapa[i][j]=0;
-			}
-	}
 		
-		mapa[3][1]=1;
 		mapa[4][1]=1;
 		mapa[9][1]=1;
-		mapa[3][2]=1;
 		mapa[4][2]=1;
 		mapa[5][2]=1;
 		mapa[6][2]=1;
@@ -131,10 +129,38 @@ public class Logica {
 		mapa[10][2]=1;
 		mapa[11][2]=1;
 		mapa[12][2]=1;
+		mapa[3][3]=1;
+		mapa[4][3]=1;
+		mapa[5][3]=1;
+		mapa[6][3]=1;
+		mapa[7][3]=1;
+		mapa[8][3]=1;
+		mapa[9][3]=1;
+		mapa[3][4]=1;
+		mapa[4][4]=1;
+		mapa[5][4]=1;
+		mapa[6][4]=1;
+		mapa[7][4]=1;
+		mapa[8][4]=1;
+		mapa[9][4]=1;
 		
-	
-	
-	
+		
+		for (int i = 0; i < col; i++) {
+			for (int j = 0; j < fila; j++) {
+				int x = col*j;
+				int y = fila*i;
+				
+				if(mapa[i][j]==1) {
+					app.rect(x,y,col,fila);
+					
+				}
+				
+				
+			}
+	}
+		
+
+		
 
 }
 }
