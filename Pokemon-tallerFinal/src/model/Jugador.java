@@ -22,7 +22,7 @@ public class Jugador implements Serializable {
 		date= new GregorianCalendar();
 	
 	}
-	
+		
 		
 	public Calendar getDate() {
 		return date;

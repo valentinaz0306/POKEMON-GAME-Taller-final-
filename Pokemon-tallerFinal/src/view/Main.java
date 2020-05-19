@@ -6,6 +6,7 @@ import processing.core.PFont;
 import controlP5.*;
 import model.Jugador;
 import model.Logica;
+import model.Personaje;
 
 import java.util.ArrayList;
 
@@ -95,8 +96,7 @@ public class Main extends PApplet {
 		gpk=false;
 		wpk=false;
 		
-		
-
+	
 		/// usuarios
 
 		// SE AÑADE UN NUEVO USUARIO AL ARRAYLIST
@@ -174,7 +174,7 @@ public class Main extends PApplet {
 			image(mapobject, 0, 0);
 			username.hide();
 
-			//logica.mapmatriz()
+			
 			;
 			
 			

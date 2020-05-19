@@ -14,7 +14,18 @@ public class Logica {
 	PApplet app;
 	public int fila=7;
 	public int col=12;
-	public int mapa [][];
+	public int mapa [][]= {
+			{0,0,0,1,0,0,0,0,1,1,0,0},
+			{0,0,0,1,1,1,1,1,1,1,1,1},
+			{0,0,1,1,2,2,2,2,1,1,0,0},
+			{0,0,1,1,2,2,2,2,1,1,0,0},
+			{0,0,1,1,1,1,1,1,1,1,0,0},
+			{0,1,1,1,1,1,1,1,1,1,1,1},
+			{0,1,1,1,1,0,0,0,1,1,1,1},
+			
+	};
+	
+
 	
 	
  
@@ -116,51 +127,15 @@ public class Logica {
 	}
 	
 	
-	public void mapmatriz() {
-		
-		mapa[4][1]=1;
-		mapa[9][1]=1;
-		mapa[4][2]=1;
-		mapa[5][2]=1;
-		mapa[6][2]=1;
-		mapa[7][2]=1;
-		mapa[8][2]=1;
-		mapa[9][2]=1;
-		mapa[10][2]=1;
-		mapa[11][2]=1;
-		mapa[12][2]=1;
-		mapa[3][3]=1;
-		mapa[4][3]=1;
-		mapa[5][3]=1;
-		mapa[6][3]=1;
-		mapa[7][3]=1;
-		mapa[8][3]=1;
-		mapa[9][3]=1;
-		mapa[3][4]=1;
-		mapa[4][4]=1;
-		mapa[5][4]=1;
-		mapa[6][4]=1;
-		mapa[7][4]=1;
-		mapa[8][4]=1;
-		mapa[9][4]=1;
+	public void character(PApplet app) {
+		this.app=app;
 		
 		
-		for (int i = 0; i < col; i++) {
-			for (int j = 0; j < fila; j++) {
-				int x = col*j;
-				int y = fila*i;
-				
-				if(mapa[i][j]==1) {
-					app.rect(x,y,col,fila);
-					
-				}
-				
-				
-			}
-	}
+		 
 		
 
 		
 
 }
 }
+
