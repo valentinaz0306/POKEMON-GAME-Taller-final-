@@ -71,7 +71,7 @@ public class Main extends PApplet {
 
 	public void setup() {
 
-		logica = new Logica();
+		logica = new Logica(this);
 		pokemon = new Pokemon(info, info, T, T, T, fpk);
 		// exception
 		mensaje = false;
@@ -117,6 +117,10 @@ public class Main extends PApplet {
 				.setColor(color(255, 255, 255)).setColorBackground(0).setColorActive(0).setColorLabel(0)
 				.setColorCaptionLabel(0).setColorForeground(0);
 
+		
+		logica.loadPersonaje();
+		
+		
 	}
 
 	public void draw() {
@@ -182,9 +186,11 @@ public class Main extends PApplet {
 
 		case 4:
 			image(map, 0, 0);
+			logica.drawUser(ch);
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
 			username.hide();
+	
 
 			;
 
@@ -262,6 +268,9 @@ public class Main extends PApplet {
 			logica.generarPokemon();
 
 		}
+		
+		
+		logica.movePersonaje(key);
 
 	}
 	// cierra key

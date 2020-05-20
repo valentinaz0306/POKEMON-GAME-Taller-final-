@@ -2,6 +2,8 @@ package model;
 
 import java.io.File;
 import processing.core.PApplet;
+import processing.core.PImage;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,28 +19,62 @@ public class Logica {
 	public int fila = 7;
 	public int col = 12;
 	public int mapa[][] = {
-			
-			{0,0,0,1,0,0,0,0,1,1,0,0},
-			{0,0,0,1,1,1,1,1,1,1,1,1},
-			{0,0,1,1,2,2,2,2,1,1,0,0},
-			{0,0,1,1,2,2,2,2,1,1,0,0},
-			{0,0,1,1,1,1,1,1,1,1,0,0},
-			{0,1,1,1,1,1,1,1,1,1,1,1},
-			{0,1,1,1,1,0,0,0,1,1,1,1},
-			
+
+			{ 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0 }, { 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+			{ 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 }, { 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 },
+			{ 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 }, { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+			{ 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1 },
 
 	};
+
+	private Personaje persona;
 
 	// arralist para registar usuarios
 	private ArrayList<Jugador> users;
 
-	public Logica() {
-
+	public Logica(PApplet app) {
+		this.app = app;
 		loadUsers();
 		generarPokemon();
-		//System.out.println(mapa.length+ " "+ mapa[0].length);
+		// System.out.println(mapa.length+ " "+ mapa[0].length);
 
 	}
+
+	//Method Paint the Character in map screen
+	  public void drawUser(PImage j) {
+	  persona.draw(j);
+	  }
+	  
+	  //Method to move that Character in map screen
+	  public void movePersonaje(char e) {
+		  switch (e) {
+		case 'k': persona.movedown();
+			System.out.println("down");
+			break;
+			
+		case 'i': persona.moveup();
+		System.out.println("up");
+		break;
+		
+		case 'l': persona.moveright();
+		System.out.println("right");
+		break;
+		
+		case 'j': persona.moveleft();
+		System.out.println("left");
+		break;
+			
+
+		default:
+			break;
+		}
+	  }
+	 
+
+	public void loadPersonaje() {
+		
+		persona = new Personaje(300, 50, app);
+	};
 
 	public void generarPokemon() {
 
@@ -51,7 +87,7 @@ public class Logica {
 			Par p = new Par(i, j);
 			if (!generados.contains(p)) {
 				generados.add(p);
-				mapa[i][j]=3;
+				mapa[i][j] = 3;
 			}
 			if (generados.size() == 3) {
 				continuar = false;
@@ -76,26 +112,24 @@ public class Logica {
 	}
 
 	public void probar() {
-		
-		for(int i = 0; i<mapa.length;i++){
-			System.out.println(" ");
-			for(int j=0; j<mapa[0].length; j++){
-			System.out.print(mapa[i][j]+" ");
-			}
-			}
-		//-for (int i = 0; i < users.size(); i++) {
-			//System.out.println(users.get(i).getUsername() + " Fecha:" + users.get(i).getDate().getTime());
-		}
-		//-System.out.println(users.size());
-		// System.out.println("despues de ordenar");
-		// ordenarNombre();
 
 		/*
-		 * for (int i = 0; i < users.size(); i++) {
-		 * System.out.println(users.get(i).getUsername() + " Fecha:" +
-		 * users.get(i).getDate().getTime()); }
+		 * for(int i = 0; i<mapa.length;i++){ System.out.println(" "); for(int j=0;
+		 * j<mapa[0].length; j++){ System.out.print(mapa[i][j]+" "); } }
 		 */
-	//}
+		for (int i = 0; i < users.size(); i++) {
+			// System.out.println(users.get(i).getUsername() + " Fecha:" +
+			// users.get(i).getDate().getTime());
+		}
+		System.out.println(users.size());
+		System.out.println("despues de ordenar");
+		ordenarNombre();
+
+		for (int i = 0; i < users.size(); i++) {
+			System.out.println(users.get(i).getUsername() + " Fecha:" + users.get(i).getDate().getTime());
+		}
+
+	}
 
 	public String[] guardarTxt() {
 

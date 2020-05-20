@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+
 public class Jugador implements Serializable {
 
 	private String username;
@@ -12,7 +13,7 @@ public class Jugador implements Serializable {
 	private Calendar date;
 	private int px;
 	private int py;
-	
+
 	
 	public Jugador(String username) {
 		this.username = username;
@@ -22,7 +23,8 @@ public class Jugador implements Serializable {
 		date= new GregorianCalendar();
 	
 	}
-		
+	
+	
 		
 	public Calendar getDate() {
 		return date;
