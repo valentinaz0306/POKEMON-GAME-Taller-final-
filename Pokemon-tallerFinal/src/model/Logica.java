@@ -40,39 +40,42 @@ public class Logica {
 
 	}
 
-	//Method Paint the Character in map screen
-	  public void drawUser(PImage j) {
-	  persona.draw(j);
-	  }
-	  
-	  //Method to move that Character in map screen
-	  public void movePersonaje(char e) {
-		  switch (e) {
-		case 'k': persona.movedown();
+	// Method Paint the Character in map screen
+	public void drawUser(PImage j) {
+		persona.draw(j);
+	}
+
+	// Method to move that Character in map screen
+	public void movePersonaje(char e) {
+		switch (e) {
+		case 'k':
+			persona.movedown();
 			System.out.println("down");
 			break;
-			
-		case 'i': persona.moveup();
-		System.out.println("up");
-		break;
-		
-		case 'l': persona.moveright();
-		System.out.println("right");
-		break;
-		
-		case 'j': persona.moveleft();
-		System.out.println("left");
-		break;
-			
+
+		case 'i':
+			persona.moveup();
+			System.out.println("up");
+			break;
+
+		case 'l':
+			persona.moveright();
+			System.out.println("right");
+			break;
+
+		case 'j':
+			persona.moveleft();
+			System.out.println("left");
+			break;
 
 		default:
 			break;
 		}
-	  }
-	 
+	}
 
+    //Method to create the OBJECT Personaje
 	public void loadPersonaje() {
-		
+
 		persona = new Personaje(300, 50, app);
 	};
 
@@ -118,8 +121,8 @@ public class Logica {
 		 * j<mapa[0].length; j++){ System.out.print(mapa[i][j]+" "); } }
 		 */
 		for (int i = 0; i < users.size(); i++) {
-			// System.out.println(users.get(i).getUsername() + " Fecha:" +
-			// users.get(i).getDate().getTime());
+		System.out.println(users.get(i).getUsername() + " Fecha:" +
+		 users.get(i).getDate().getTime());
 		}
 		System.out.println(users.size());
 		System.out.println("despues de ordenar");
