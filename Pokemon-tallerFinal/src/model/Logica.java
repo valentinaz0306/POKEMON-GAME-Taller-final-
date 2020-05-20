@@ -8,13 +8,16 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Logica {
-	
+
 	PApplet app;
-	public int fila=7;
-	public int col=12;
-	public int mapa [][]= {
+	public int fila = 7;
+	public int col = 12;
+	public int mapa[][] = {
+			
 			{0,0,0,1,0,0,0,0,1,1,0,0},
 			{0,0,0,1,1,1,1,1,1,1,1,1},
 			{0,0,1,1,2,2,2,2,1,1,0,0},
@@ -23,18 +26,37 @@ public class Logica {
 			{0,1,1,1,1,1,1,1,1,1,1,1},
 			{0,1,1,1,1,0,0,0,1,1,1,1},
 			
-	};
-	
 
-	
-	
- 
+	};
+
 	// arralist para registar usuarios
 	private ArrayList<Jugador> users;
-	
+
 	public Logica() {
 
 		loadUsers();
+		generarPokemon();
+		//System.out.println(mapa.length+ " "+ mapa[0].length);
+
+	}
+
+	public void generarPokemon() {
+
+		boolean continuar = true;
+		Set<Par> generados = new HashSet<>();
+
+		while (continuar) {
+			int i = (int) (Math.random() * (4 - 2)) + 2;
+			int j = (int) (Math.random() * (8 - 4)) + 4;
+			Par p = new Par(i, j);
+			if (!generados.contains(p)) {
+				generados.add(p);
+				mapa[i][j]=3;
+			}
+			if (generados.size() == 3) {
+				continuar = false;
+			}
+		}
 
 	}
 
@@ -54,11 +76,17 @@ public class Logica {
 	}
 
 	public void probar() {
-
-		for (int i = 0; i < users.size(); i++) {
-			System.out.println(users.get(i).getUsername() + " Fecha:" + users.get(i).getDate().getTime());
+		
+		for(int i = 0; i<mapa.length;i++){
+			System.out.println(" ");
+			for(int j=0; j<mapa[0].length; j++){
+			System.out.print(mapa[i][j]+" ");
+			}
+			}
+		//-for (int i = 0; i < users.size(); i++) {
+			//System.out.println(users.get(i).getUsername() + " Fecha:" + users.get(i).getDate().getTime());
 		}
-		System.out.println(users.size());
+		//-System.out.println(users.size());
 		// System.out.println("despues de ordenar");
 		// ordenarNombre();
 
@@ -67,7 +95,7 @@ public class Logica {
 		 * System.out.println(users.get(i).getUsername() + " Fecha:" +
 		 * users.get(i).getDate().getTime()); }
 		 */
-	}
+	//}
 
 	public String[] guardarTxt() {
 
@@ -125,17 +153,9 @@ public class Logica {
 	public void setUsers(ArrayList<Jugador> users) {
 		this.users = users;
 	}
-	
-	
+
 	public void character(PApplet app) {
-		this.app=app;
-		
-		
-		 
-		
+		this.app = app;
 
-		
-
+	}
 }
-}
-

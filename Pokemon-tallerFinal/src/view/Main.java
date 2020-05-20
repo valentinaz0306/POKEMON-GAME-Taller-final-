@@ -6,6 +6,7 @@ import processing.core.PFont;
 import controlP5.*;
 import model.Jugador;
 import model.Logica;
+import model.Pokemon;
 import model.Personaje;
 
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ import java.util.ArrayList;
 public class Main extends PApplet {
 
 	private ControlP5 cp5;
-
 	private Logica logica;
+	private Pokemon pokemon;
 
 	////
 	String info = "";
@@ -42,12 +43,12 @@ public class Main extends PApplet {
 	PImage wpoke;
 	PImage gpoke;
 	PImage fpoke;
-	
+
 	// Int variables
 
 	int pantalla;
 	int T;
-	
+
 	// boolean
 	boolean fpk;
 	boolean gpk;
@@ -66,6 +67,8 @@ public class Main extends PApplet {
 	public void setup() {
 
 		logica = new Logica();
+		pokemon= new Pokemon(info, info, T, T, T, fpk);
+		
 		// Load images
 		start = loadImage("image/start.png");
 		logo = loadImage("image/logo.png");
@@ -82,21 +85,20 @@ public class Main extends PApplet {
 		pokeballs = loadImage("image/pokeballs.png");
 		pokeselec = loadImage("image/pokeselec.png");
 		tuto = loadImage("image/tuto.png");
-		ch=loadImage("image/ch.png");
-		p1=loadImage("image/p1.png");
-		fpoke=loadImage("image/fpoke.png");
-		gpoke=loadImage("image/gpoke.png");
-		wpoke=loadImage("image/wpoke.png");
+		ch = loadImage("image/ch.png");
+		p1 = loadImage("image/p1.png");
+		fpoke = loadImage("image/fpoke.png");
+		gpoke = loadImage("image/gpoke.png");
+		wpoke = loadImage("image/wpoke.png");
 
 		// Load int variables
 		pantalla = 0;
-		
-		//load boolean variables
-		fpk=false;
-		gpk=false;
-		wpk=false;
-		
-	
+
+		// load boolean variables
+		fpk = false;
+		gpk = false;
+		wpk = false;
+
 		/// usuarios
 
 		// SE AÑADE UN NUEVO USUARIO AL ARRAYLIST
@@ -135,37 +137,33 @@ public class Main extends PApplet {
 			text("Press Enter to continue", 440, 650);
 
 			break;
-			
-			
+
 		case 2:
 
 			image(start, 0, 0);
 			image(dim, 0, 0);
 			username.hide();
-			image(tuto,0,0);
-		
-			/*textSize(50);
-			text("Set a nickname", 400, 150);
-			textSize(25);
-			text("Press Enter to continue", 440, 650);
-*/
+			image(tuto, 0, 0);
+
+			/*
+			 * textSize(50); text("Set a nickname", 400, 150); textSize(25);
+			 * text("Press Enter to continue", 440, 650);
+			 */
 			break;
-			
-		case 3: 
+
+		case 3:
 
 			image(bg1, 0, 0);
 			image(dim, 0, 0);
 			username.hide();
-			if(wpk==false&&gpk==false&&fpk==false) {
-				image(p1,0,0);
+			if (wpk == false && gpk == false && fpk == false) {
+				image(p1, 0, 0);
 			}
-			image(dialoguebox,0,50);
-			image(box,0,0);
+			image(dialoguebox, 0, 50);
+			image(box, 0, 0);
 			hoverpokechoose();
-			image(pokeballs,0,0);
-			
-			
-			
+			image(pokeballs, 0, 0);
+
 			break;
 
 		case 4:
@@ -174,15 +172,8 @@ public class Main extends PApplet {
 			image(mapobject, 0, 0);
 			username.hide();
 
-			
 			;
-			
-			
-			
-			
-			
-			
-			
+
 			break;
 
 		}// cierre switch
@@ -193,24 +184,24 @@ public class Main extends PApplet {
 	}
 
 	public void mousePressed() {
-		if((mouseX>565 && mouseX<648)&&(mouseY>237 && mouseY<307)) {
-			fpk=!fpk;
-			gpk=false;
-			wpk=false;
+		if ((mouseX > 565 && mouseX < 648) && (mouseY > 237 && mouseY < 307)) {
+			fpk = !fpk;
+			gpk = false;
+			wpk = false;
 		}
-		
-		if((mouseX>720 && mouseX<813)&&(mouseY>239 && mouseY<293)) {
-			gpk=!gpk;
-			fpk=false;
-			wpk=false;
-		
+
+		if ((mouseX > 720 && mouseX < 813) && (mouseY > 239 && mouseY < 293)) {
+			gpk = !gpk;
+			fpk = false;
+			wpk = false;
+
 		}
-		
-		if((mouseX>878 && mouseX<965)&&(mouseY>235 && mouseY<300)) {
-			wpk=!wpk;
-			gpk=false;
-			fpk=false;
-			
+
+		if ((mouseX > 878 && mouseX < 965) && (mouseY > 235 && mouseY < 300)) {
+			wpk = !wpk;
+			gpk = false;
+			fpk = false;
+
 		}
 
 	}
@@ -230,16 +221,17 @@ public class Main extends PApplet {
 
 			saveStrings("data/reporte.txt", logica.guardarTxt());
 		}
-
+		// con s aparecen los usuarios que se han registrado
 		if (key == 's') {
 
 			logica.probar();
 		}
-
+		// con d se ordena por fecha
 		if (key == 'd') {
 
 			logica.ordenarFecha();
 		}
+		// con f se ordena por nombre
 		if (key == 'f') {
 
 			logica.ordenarNombre();
@@ -248,54 +240,48 @@ public class Main extends PApplet {
 		if (key == 'g') {
 
 			logica.saveUsers();
-			
+
 		}
 		
+		if (key == 'p') {
+
+			logica.generarPokemon();
+
+		}
+
 	}
 	// cierra key
 
 	public void keyCode() {
-		
+
 	}
-	
-	
-	
+
 	public void hoverpokechoose() {
-		
-		if((mouseX>565 && mouseX<648)&&(mouseY>237 && mouseY<307)) {
-			image(pokeselec,0,0);
-		}
-		
-		if((mouseX>720 && mouseX<813)&&(mouseY>239 && mouseY<293)) {
-			image(pokeselec,160,0);
-		}
-		
-		if((mouseX>878 && mouseX<965)&&(mouseY>235 && mouseY<300)) {
-			image(pokeselec,310,0);
-		}
-		
-		
-		if(fpk==true) {
-			image(fpoke,0,0);
-		}
-		
-		if(gpk==true) {
-			image(gpoke,0,0);
-		}
-		
-		if(wpk==true) {
-			image(wpoke,0,0);
+
+		if ((mouseX > 565 && mouseX < 648) && (mouseY > 237 && mouseY < 307)) {
+			image(pokeselec, 0, 0);
 		}
 
-		
-		
-		
-		
-		
-		
-		
+		if ((mouseX > 720 && mouseX < 813) && (mouseY > 239 && mouseY < 293)) {
+			image(pokeselec, 160, 0);
+		}
+
+		if ((mouseX > 878 && mouseX < 965) && (mouseY > 235 && mouseY < 300)) {
+			image(pokeselec, 310, 0);
+		}
+
+		if (fpk == true) {
+			image(fpoke, 0, 0);
+		}
+
+		if (gpk == true) {
+			image(gpoke, 0, 0);
+		}
+
+		if (wpk == true) {
+			image(wpoke, 0, 0);
+		}
+
 	}
-	
-	
-	
+
 }// cierra main
