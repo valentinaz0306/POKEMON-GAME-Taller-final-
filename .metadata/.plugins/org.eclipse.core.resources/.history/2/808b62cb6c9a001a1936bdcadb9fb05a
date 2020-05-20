@@ -151,7 +151,6 @@ public class Main extends PApplet {
 			image(dim, 0, 0);
 			username.hide();
 			image(tuto, 0, 0);
-			
 			// condicional mensaje excepcion
 
 			if (mensaje) {

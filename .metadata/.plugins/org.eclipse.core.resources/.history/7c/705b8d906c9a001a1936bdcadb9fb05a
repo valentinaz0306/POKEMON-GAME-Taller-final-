@@ -60,8 +60,6 @@ public class Main extends PApplet {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PApplet.main("view.Main");
-		
-		probarExcepciones();
 	}
 
 	public void settings() {
@@ -151,12 +149,11 @@ public class Main extends PApplet {
 			image(dim, 0, 0);
 			username.hide();
 			image(tuto, 0, 0);
-			
 			// condicional mensaje excepcion
 
 			if (mensaje) {
 				fill(255);
-				text("Excedió el límite de caracteres", 400, 400);
+				text("Ya no hay elementos", 400, 400);
 			}
 
 			/*
@@ -306,7 +303,7 @@ public class Main extends PApplet {
 			
 		} catch(NameException e){
 		
-			System.out.println("Excedió el límite de caracteres");
+			System.out.println("mensajeee");
 			//JOptionPane.showMessageDialog(null, "Hello World");
 			mensaje=true;
 		}

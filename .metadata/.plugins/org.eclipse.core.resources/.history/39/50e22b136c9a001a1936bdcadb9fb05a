@@ -4,7 +4,6 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PFont;
 import controlP5.*;
-import exceptions.NameException;
 import model.Jugador;
 import model.Logica;
 import model.Pokemon;
@@ -17,7 +16,6 @@ public class Main extends PApplet {
 	private ControlP5 cp5;
 	private Logica logica;
 	private Pokemon pokemon;
-	// mensaje para excepción
 	private static boolean mensaje;
 
 	////
@@ -60,8 +58,6 @@ public class Main extends PApplet {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PApplet.main("view.Main");
-		
-		probarExcepciones();
 	}
 
 	public void settings() {
@@ -72,10 +68,8 @@ public class Main extends PApplet {
 	public void setup() {
 
 		logica = new Logica();
-		pokemon = new Pokemon(info, info, T, T, T, fpk);
-		// exception
-		mensaje = false;
-
+		pokemon= new Pokemon(info, info, T, T, T, fpk);
+		
 		// Load images
 		start = loadImage("image/start.png");
 		logo = loadImage("image/logo.png");
@@ -151,13 +145,6 @@ public class Main extends PApplet {
 			image(dim, 0, 0);
 			username.hide();
 			image(tuto, 0, 0);
-			
-			// condicional mensaje excepcion
-
-			if (mensaje) {
-				fill(255);
-				text("Excedió el límite de caracteres", 400, 400);
-			}
 
 			/*
 			 * textSize(50); text("Set a nickname", 400, 150); textSize(25);
@@ -256,7 +243,7 @@ public class Main extends PApplet {
 			logica.saveUsers();
 
 		}
-
+		
 		if (key == 'p') {
 
 			logica.generarPokemon();
@@ -296,23 +283,6 @@ public class Main extends PApplet {
 			image(wpoke, 0, 0);
 		}
 
-	}// cierra key
-	
-	public static void probarExcepciones() {
-		//lanzar excepcion
-		
-		try{
-			throw new NameException();
-			
-		} catch(NameException e){
-		
-			System.out.println("Excedió el límite de caracteres");
-			//JOptionPane.showMessageDialog(null, "Hello World");
-			mensaje=true;
-		}
-		
 	}
-	
-	
 
 }// cierra main
