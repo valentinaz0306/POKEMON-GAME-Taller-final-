@@ -14,18 +14,23 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Logica {
-
+	public final static int SIZE_MATRIX=100;
 	PApplet app;
 	public int fila = 7;
 	public int col = 12;
 	public int mapa[][] = {
 
-			{ 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0 }, { 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-			{ 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 }, { 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 },
-			{ 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 }, { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+			{ 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0 }, 
+			{ 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+			{ 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 }, 
+			{ 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 },
+			{ 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 },
+			{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 			{ 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1 },
 
 	};
+	
+	
 
 	private Personaje persona;
 
@@ -41,13 +46,20 @@ public class Logica {
 	}
 
 	// Method Paint the Character in map screen
-	public void drawUser(PImage j) {
-		persona.draw(j);
+	public void character() {
+
+		getPersona().move();
 	}
 
 	// Method to move that Character in map screen
 	public void movePersonaje(char e) {
-		switch (e) {
+	
+		
+		/*Par currentPar = persona.converttoindex();
+		int i = 
+		int j =*/
+		
+		/*switch (e) {
 		case 'k':
 			persona.movedown();
 			System.out.println("down");
@@ -70,13 +82,19 @@ public class Logica {
 
 		default:
 			break;
-		}
+		}*/
 	}
+	
+	
+	public void changemovstate(char dir) {
+		getPersona().setDirection(dir);
+	}
+	
 
-    //Method to create the OBJECT Personaje
+	// Method to create the OBJECT Personaje
 	public void loadPersonaje() {
 
-		persona = new Personaje(300, 50, app);
+		setPersona(new Personaje(300, 50,mapa, app));
 	};
 
 	public void generarPokemon() {
@@ -121,8 +139,7 @@ public class Logica {
 		 * j<mapa[0].length; j++){ System.out.print(mapa[i][j]+" "); } }
 		 */
 		for (int i = 0; i < users.size(); i++) {
-		System.out.println(users.get(i).getUsername() + " Fecha:" +
-		 users.get(i).getDate().getTime());
+			System.out.println(users.get(i).getUsername() + " Fecha:" + users.get(i).getDate().getTime());
 		}
 		System.out.println(users.size());
 		System.out.println("despues de ordenar");
@@ -194,5 +211,13 @@ public class Logica {
 	public void character(PApplet app) {
 		this.app = app;
 
+	}
+
+	public Personaje getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Personaje persona) {
+		this.persona = persona;
 	}
 }

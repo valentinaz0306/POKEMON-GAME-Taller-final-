@@ -46,6 +46,8 @@ public class Main extends PApplet {
 	PImage wpoke;
 	PImage gpoke;
 	PImage fpoke;
+	
+
 
 	// Int variables
 
@@ -97,7 +99,9 @@ public class Main extends PApplet {
 		fpoke = loadImage("image/fpoke.png");
 		gpoke = loadImage("image/gpoke.png");
 		wpoke = loadImage("image/wpoke.png");
-
+		
+		
+	
 		// Load int variables
 		pantalla = 0;
 
@@ -186,12 +190,14 @@ public class Main extends PApplet {
 
 		case 4:
 			image(map, 0, 0);
-			logica.drawUser(ch);
+			logica.character();	
+			rectMode(CENTER);
+			image(ch,logica.getPersona().PosX,logica.getPersona().PosY,50,50);
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
 			username.hide();
 	
-
+			
 			;
 
 			break;
@@ -202,6 +208,10 @@ public class Main extends PApplet {
 		text("X:" + mouseX + "Y:" + mouseY, mouseX, mouseY);
 
 	}
+	
+	
+
+	
 
 	public void mousePressed() {
 		if ((mouseX > 565 && mouseX < 648) && (mouseY > 237 && mouseY < 307)) {
@@ -269,11 +279,46 @@ public class Main extends PApplet {
 
 		}
 		
-		
-		logica.movePersonaje(key);
+		if(key=='i') {
+			logica.changemovstate(Personaje.UP);
+		}
+		if(key=='j') {
+			logica.changemovstate(Personaje.LEFT);
+		}
+		if(key=='k') {
+			logica.changemovstate(Personaje.DOWN);
+		}
+		if(key=='l') {
+			logica.changemovstate(Personaje.RIGHT);
+		}
+
 
 	}
 	// cierra key
+	
+	
+	public void keyReleased() {
+		if(key=='i') {
+			logica.changemovstate(Personaje.STILL);
+		}
+		if(key=='j') {
+			logica.changemovstate(Personaje.STILL);
+		}
+		if(key=='k') {
+			logica.changemovstate(Personaje.STILL);
+		}
+		if(key=='l') {
+			logica.changemovstate(Personaje.STILL);
+		}
+		
+		
+		
+		
+		
+	}
+	
+	
+	
 
 	public void keyCode() {
 

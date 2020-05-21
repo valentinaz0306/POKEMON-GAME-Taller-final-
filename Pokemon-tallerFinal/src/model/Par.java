@@ -26,5 +26,38 @@ public class Par {
 	public void setJ(int j) {
 		this.j = j;
 	}
+	
+	@Override
+    public int hashCode() {
+
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (i*j);
+
+        return result;
+    }
+
+     @Override
+     public boolean equals(Object o) {
+
+         if(!(o instanceof Par)) {
+             return false;
+         }
+
+         if (o == this)
+                return true;
+
+             Par p = (Par)o;
+         if(i==p.getI() && j == p.getJ()) {
+             return true;
+         }else {
+             return false;
+         }
+     }
+
+	
+	
+	
+	
 
 }
