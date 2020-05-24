@@ -38,6 +38,7 @@ public class Main extends PApplet {
 	PImage mapobject;
 	PImage bg1;
 	PImage dim;
+	PImage dimwhite;
 	PImage arrow;
 	PImage box;
 	PImage dialoguebox;
@@ -51,6 +52,15 @@ public class Main extends PApplet {
 	PImage wpoke;
 	PImage gpoke;
 	PImage fpoke;
+	PImage wpokeme;
+	PImage gpokeme;
+	PImage fpokeme;
+	PImage wpokefight;
+	PImage gpokefight;
+	PImage fpokefight;
+	PImage fboton1;
+	PImage fboton2;
+	PImage fboton3;
 
 	int chnum = 4; // number of images
 	PImage[] chdown = new PImage[chnum]; // ? just copied someone else's on a forum don't really get this line
@@ -97,9 +107,10 @@ public class Main extends PApplet {
 		// Load sound
 		mapmusic = new SoundFile(this, "music/map.mp3");
 		fightmusic = new SoundFile(this, "music/fight.mp3");
-		mapmusic.amp((float) 0.1);
+		/*mapmusic.amp((float) 0.1);
 		mapmusic.play();
 		mapmusic.loop();
+		*/
 
 		// Load images
 		start = loadImage("image/start.png");
@@ -108,6 +119,7 @@ public class Main extends PApplet {
 		mapshadows = loadImage("image/mapshadows.png");
 		mapobject = loadImage("image/mapobject.png");
 		dim = loadImage("image/dim.png");
+		dimwhite = loadImage("image/dimwhite.png");
 		bg1 = loadImage("image/bg1.png");
 		arrow = loadImage("image/arrow.png");
 		box = loadImage("image/box.png");
@@ -122,6 +134,15 @@ public class Main extends PApplet {
 		fpoke = loadImage("image/fpoke.png");
 		gpoke = loadImage("image/gpoke.png");
 		wpoke = loadImage("image/wpoke.png");
+		fpokeme = loadImage("image/fpokeme.png");
+		gpokeme = loadImage("image/gpokeme.png");
+		wpokeme = loadImage("image/wpokeme.png");
+		fpokefight = loadImage("image/fpokefight.png");
+		gpokefight = loadImage("image/gpokefight.png");
+		wpokefight = loadImage("image/wpokefight.png");
+		fboton1 = loadImage("image/fboton1.png");
+		fboton2 = loadImage("image/fboton2.png");
+		fboton3 = loadImage("image/fboton3.png");
 
 		for (int i = 0; i < 3; i++) {
 			chdown[i] = loadImage("image/sprite/chdown" + i + ".png");
@@ -244,12 +265,55 @@ public class Main extends PApplet {
 			image(map, 0, 0);
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
+			image(dimwhite,0, 0);
+			image(fpokefight, 0, 0);
+			image(gpokefight, 0, 0);
+			image(wpokefight, 0, 0);
+			image(fpokeme, 0, 0);
+			image(gpokeme, 0, 0);
+			image(wpokeme, 0, 0);
 			image(fightbox, 0, 0);
 			image(fightmenu, 0, 0);
+			
+			
+			//Enemy
 			fill(0);
-			text(logica.getTorchi().getNombre(), 67, 75);
-			rect(80, 143, logica.getTorchi().getVida(), 10);
-			text(logica.getTorchi().getNivel(), 355, 143);
+			textSize(25);
+			text("Enemy",74,75);
+			text(logica.getTorchi().getNombre(), 82, 122);
+			fill(0,255,0);
+			noStroke();
+			rect(80, 130, logica.getTorchi().getVida(), 20,20);
+			fill(0);
+			textSize(20);
+			text("lvl"+logica.getTorchi().getNivel(), 355, 143);
+			
+			
+			
+			
+			//Character
+			fill(0);
+			textSize(25);
+			text("You",1055,389);
+			text("Your pokemon", 785, 435);
+			fill(0,255,0);
+			noStroke();
+			rect(781, 448, logica.getTorchi().getVida(), 20,20);
+			fill(0);
+			textSize(20);
+			text("lvl"+logica.getTorchi().getNivel(), 1085, 468);
+			
+			
+			//Fight menu
+			image(fboton1,0,0);
+			image(fboton2,0,0);
+			image(fboton3,0,0);
+			textSize(30);
+			text("Fight",775,578);
+			text("Pokeball",950,578);
+			text("Run",775,630);
+			textSize(20);
+			text("What is your next move?",103,556,598,647);
 
 			break;
 
@@ -292,12 +356,12 @@ public class Main extends PApplet {
 
 			}
 
-			if (pantalla == 4) {
+		/*	if (pantalla == 4) {
 				mapmusic.stop();
 				fightmusic.amp((float) 0.05);
 				fightmusic.play();
 
-			}
+			}*/
 			pantalla++;
 		}
 

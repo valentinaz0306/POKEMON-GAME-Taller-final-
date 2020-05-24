@@ -66,7 +66,7 @@ public class Logica {
 	
 	// Mothod to create the OBJECT Pokemon
 	public void loadTorchi() {
-		setTorchi(new Pokemon("fire","torchi", 5, 200, 0, false));
+		setTorchi(new Pokemon("Fire","Torchi", 5, 200, 0, false));
 	}
 
 	public void generarPokemon() {
