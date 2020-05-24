@@ -2,6 +2,7 @@ package view;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.sound.SoundFile;
 import processing.core.PFont;
 import controlP5.*;
 import exceptions.NameException;
@@ -24,6 +25,12 @@ public class Main extends PApplet {
 	String info = "";
 	Textfield username, password;
 	Textfield usernameR, emailR, passwordR, cPasswordR;
+	
+	
+	//Sound variables
+	SoundFile mapmusic;
+	
+	
 
 	// Image variables
 	PImage start;
@@ -46,23 +53,34 @@ public class Main extends PApplet {
 	PImage wpoke;
 	PImage gpoke;
 	PImage fpoke;
+
+	int chnum = 4; // number of images
+	PImage[] chdown = new PImage[chnum]; // ? just copied someone else's on a forum don't really get this line
+	PImage[] chup = new PImage[chnum];
+	PImage[] chur = new PImage[chnum];
+	PImage[] chul = new PImage[chnum];
 	
-
-
 	// Int variables
 
 	int pantalla;
 	int T;
+	int pv;
 
 	// boolean
 	boolean fpk;
 	boolean gpk;
 	boolean wpk;
 
+	boolean up;
+	boolean down;
+	boolean right;
+	boolean left;
+	boolean still;
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PApplet.main("view.Main");
-		
+
 		probarExcepciones();
 	}
 
@@ -77,6 +95,15 @@ public class Main extends PApplet {
 		pokemon = new Pokemon(info, info, T, T, T, fpk);
 		// exception
 		mensaje = false;
+		
+		
+		//Load sound 
+		mapmusic = new SoundFile(this,"music/map.mp3");
+		mapmusic.play();
+		if(mapmusic.isPlaying()) {
+			mapmusic.play();
+		}
+		
 
 		// Load images
 		start = loadImage("image/start.png");
@@ -94,21 +121,39 @@ public class Main extends PApplet {
 		pokeballs = loadImage("image/pokeballs.png");
 		pokeselec = loadImage("image/pokeselec.png");
 		tuto = loadImage("image/tuto.png");
-		ch = loadImage("image/ch.png");
+		ch = loadImage("image/sprite/chd.png");
 		p1 = loadImage("image/p1.png");
 		fpoke = loadImage("image/fpoke.png");
 		gpoke = loadImage("image/gpoke.png");
 		wpoke = loadImage("image/wpoke.png");
-		
-		
-	
+
+		for (int i = 0; i < 3; i++) {
+			chdown[i] = loadImage("image/sprite/chdown" + i + ".png");
+		}
+		for (int i = 0; i < 3; i++) {
+			chup[i] = loadImage("image/sprite/chup" + i + ".png");
+		}
+		for (int i = 0; i < 3; i++) {
+			chur[i] = loadImage("image/sprite/chright" + i + ".png");
+		}
+		for (int i = 0; i < 3; i++) {
+			chul[i] = loadImage("image/sprite/chleft" + i + ".png");
+		}
+
 		// Load int variables
 		pantalla = 0;
+		pv = 0;
 
 		// load boolean variables
 		fpk = false;
 		gpk = false;
 		wpk = false;
+
+		up = false;
+		down = false;
+		right = false;
+		left = false;
+		still=true;
 
 		/// usuarios
 
@@ -121,10 +166,8 @@ public class Main extends PApplet {
 				.setColor(color(255, 255, 255)).setColorBackground(0).setColorActive(0).setColorLabel(0)
 				.setColorCaptionLabel(0).setColorForeground(0);
 
-		
 		logica.loadPersonaje();
-		
-		
+
 	}
 
 	public void draw() {
@@ -159,7 +202,7 @@ public class Main extends PApplet {
 			image(dim, 0, 0);
 			username.hide();
 			image(tuto, 0, 0);
-			
+
 			// condicional mensaje excepcion
 
 			if (mensaje) {
@@ -190,14 +233,40 @@ public class Main extends PApplet {
 
 		case 4:
 			image(map, 0, 0);
-			logica.character();	
-			rectMode(CENTER);
-			image(ch,logica.getPersona().PosX,logica.getPersona().PosY,50,50);
+			logica.character();
+			PImage img = chdown[pv];
+			PImage img1 = chup[pv];
+			PImage img2 = chur[pv];
+			PImage img3 = chul[pv];
+			
+			
+			
+			if (still == true) {
+				image(ch, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
+			}
+			
+			if (up == true) {
+				image(img1, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
+			}
+			if (down == true) {
+				image(img, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
+			}
+			if (right == true) {
+				image(img2, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
+			}
+			if (left == true) {
+				image(img3, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
+			}
+			if (frameCount % 17 == 0) {
+				pv++;
+				if (pv == 3) {
+					pv = 0;
+				}
+			}
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
 			username.hide();
-	
-			
+
 			;
 
 			break;
@@ -208,10 +277,6 @@ public class Main extends PApplet {
 		text("X:" + mouseX + "Y:" + mouseY, mouseX, mouseY);
 
 	}
-	
-	
-
-	
 
 	public void mousePressed() {
 		if ((mouseX > 565 && mouseX < 648) && (mouseY > 237 && mouseY < 307)) {
@@ -278,47 +343,78 @@ public class Main extends PApplet {
 			logica.generarPokemon();
 
 		}
-		
-		if(key=='i') {
-			logica.changemovstate(Personaje.UP);
-		}
-		if(key=='j') {
-			logica.changemovstate(Personaje.LEFT);
-		}
-		if(key=='k') {
-			logica.changemovstate(Personaje.DOWN);
-		}
-		if(key=='l') {
-			logica.changemovstate(Personaje.RIGHT);
-		}
 
+		if (key == 'i') {
+			logica.changemovstate(Personaje.UP);
+			up = true;
+			left = false;
+			right = false;
+			down = false;
+			still=false;
+		}
+		if (key == 'j') {
+			logica.changemovstate(Personaje.LEFT);
+			up = false;
+			left = true;
+			right = false;
+			down = false;
+			still=false;
+		}
+		if (key == 'k') {
+			logica.changemovstate(Personaje.DOWN);
+			up = false;
+			left = false;
+			right = false;
+			down = true;
+			still=false;
+		}
+		if (key == 'l') {
+			logica.changemovstate(Personaje.RIGHT);
+			up = false;
+			left = false;
+			right = true;
+			down = false;
+			still=false;
+		}
 
 	}
 	// cierra key
-	
-	
+
 	public void keyReleased() {
-		if(key=='i') {
+		if (key == 'i') {
 			logica.changemovstate(Personaje.STILL);
+			up = false;
+			left = false;
+			right = false;
+			down = false;
+			still=true;
 		}
-		if(key=='j') {
+		if (key == 'j') {
 			logica.changemovstate(Personaje.STILL);
+			up = false;
+			left = false;
+			right = false;
+			down = false;
+			still=true;
 		}
-		if(key=='k') {
+		if (key == 'k') {
 			logica.changemovstate(Personaje.STILL);
+			up = false;
+			left = false;
+			right = false;
+			down = false;
+			still=true;
 		}
-		if(key=='l') {
+		if (key == 'l') {
 			logica.changemovstate(Personaje.STILL);
+			up = false;
+			left = false;
+			right = false;
+			down = false;
+			still=true;
 		}
-		
-		
-		
-		
-		
+
 	}
-	
-	
-	
 
 	public void keyCode() {
 
@@ -351,22 +447,20 @@ public class Main extends PApplet {
 		}
 
 	}// cierra key
-	
+
 	public static void probarExcepciones() {
-		//lanzar excepcion
-		
-		try{
+		// lanzar excepcion
+
+		try {
 			throw new NameException();
-			
-		} catch(NameException e){
-		
+
+		} catch (NameException e) {
+
 			System.out.println("Excedió el límite de caracteres");
-			//JOptionPane.showMessageDialog(null, "Hello World");
-			mensaje=true;
+			// JOptionPane.showMessageDialog(null, "Hello World");
+			mensaje = true;
 		}
-		
+
 	}
-	
-	
 
 }// cierra main

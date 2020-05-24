@@ -87,25 +87,25 @@ public class Personaje {
 
 	public void moveup() {
 		if (this.PosY > 0) {
-			this.PosY -= 5;
+			this.PosY -= 3;
 		}
 	}
 
 	public void movedown() {
 		if (PosY < 700) {
-			PosY += 5;
+			PosY += 3;
 		}
 	}
 
 	public void moveright() {
 		if (this.PosX < 1190) {
-			this.PosX += 5;
+			this.PosX += 3;
 		}
 	}
 
 	public void moveleft() {
 		if (this.PosX > 0) {
-			this.PosX -= 5;
+			this.PosX -= 3;
 		}
 
 	}
