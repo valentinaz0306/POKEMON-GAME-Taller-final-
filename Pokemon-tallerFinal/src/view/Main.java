@@ -25,12 +25,10 @@ public class Main extends PApplet {
 	String info = "";
 	Textfield username, password;
 	Textfield usernameR, emailR, passwordR, cPasswordR;
-	
-	
-	//Sound variables
+
+	// Sound variables
 	SoundFile mapmusic;
-	
-	
+	SoundFile fightmusic;
 
 	// Image variables
 	PImage start;
@@ -59,7 +57,7 @@ public class Main extends PApplet {
 	PImage[] chup = new PImage[chnum];
 	PImage[] chur = new PImage[chnum];
 	PImage[] chul = new PImage[chnum];
-	
+
 	// Int variables
 
 	int pantalla;
@@ -95,15 +93,13 @@ public class Main extends PApplet {
 		pokemon = new Pokemon(info, info, T, T, T, fpk);
 		// exception
 		mensaje = false;
-		
-		
-		//Load sound 
-		mapmusic = new SoundFile(this,"music/map.mp3");
+
+		// Load sound
+		mapmusic = new SoundFile(this, "music/map.mp3");
+		fightmusic = new SoundFile(this, "music/fight.mp3");
+		mapmusic.amp((float) 0.1);
 		mapmusic.play();
-		if(mapmusic.isPlaying()) {
-			mapmusic.play();
-		}
-		
+		mapmusic.loop();
 
 		// Load images
 		start = loadImage("image/start.png");
@@ -153,7 +149,7 @@ public class Main extends PApplet {
 		down = false;
 		right = false;
 		left = false;
-		still=true;
+		still = true;
 
 		/// usuarios
 
@@ -167,6 +163,7 @@ public class Main extends PApplet {
 				.setColorCaptionLabel(0).setColorForeground(0);
 
 		logica.loadPersonaje();
+		logica.loadTorchi();
 
 	}
 
@@ -234,40 +231,25 @@ public class Main extends PApplet {
 		case 4:
 			image(map, 0, 0);
 			logica.character();
-			PImage img = chdown[pv];
-			PImage img1 = chup[pv];
-			PImage img2 = chur[pv];
-			PImage img3 = chul[pv];
-			
-			
-			
-			if (still == true) {
-				image(ch, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
-			}
-			
-			if (up == true) {
-				image(img1, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
-			}
-			if (down == true) {
-				image(img, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
-			}
-			if (right == true) {
-				image(img2, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
-			}
-			if (left == true) {
-				image(img3, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
-			}
-			if (frameCount % 17 == 0) {
-				pv++;
-				if (pv == 3) {
-					pv = 0;
-				}
-			}
+			paintcharacter();
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
 			username.hide();
 
 			;
+
+			break;
+
+		case 5:
+			image(map, 0, 0);
+			image(mapshadows, 0, 0);
+			image(mapobject, 0, 0);
+			image(fightbox, 0, 0);
+			image(fightmenu, 0, 0);
+			fill(0);
+			text(logica.getTorchi().getNombre(), 67, 75);
+			rect(80, 143, logica.getTorchi().getVida(), 10);
+			text(logica.getTorchi().getNivel(), 355, 143);
 
 			break;
 
@@ -307,6 +289,13 @@ public class Main extends PApplet {
 			if (pantalla == 1) {
 
 				logica.addUsuario(username.getText());
+
+			}
+
+			if (pantalla == 4) {
+				mapmusic.stop();
+				fightmusic.amp((float) 0.05);
+				fightmusic.play();
 
 			}
 			pantalla++;
@@ -350,7 +339,7 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = false;
-			still=false;
+			still = false;
 		}
 		if (key == 'j') {
 			logica.changemovstate(Personaje.LEFT);
@@ -358,7 +347,7 @@ public class Main extends PApplet {
 			left = true;
 			right = false;
 			down = false;
-			still=false;
+			still = false;
 		}
 		if (key == 'k') {
 			logica.changemovstate(Personaje.DOWN);
@@ -366,7 +355,7 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = true;
-			still=false;
+			still = false;
 		}
 		if (key == 'l') {
 			logica.changemovstate(Personaje.RIGHT);
@@ -374,7 +363,7 @@ public class Main extends PApplet {
 			left = false;
 			right = true;
 			down = false;
-			still=false;
+			still = false;
 		}
 
 	}
@@ -387,7 +376,7 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = false;
-			still=true;
+			still = true;
 		}
 		if (key == 'j') {
 			logica.changemovstate(Personaje.STILL);
@@ -395,7 +384,7 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = false;
-			still=true;
+			still = true;
 		}
 		if (key == 'k') {
 			logica.changemovstate(Personaje.STILL);
@@ -403,7 +392,7 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = false;
-			still=true;
+			still = true;
 		}
 		if (key == 'l') {
 			logica.changemovstate(Personaje.STILL);
@@ -411,12 +400,8 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = false;
-			still=true;
+			still = true;
 		}
-
-	}
-
-	public void keyCode() {
 
 	}
 
@@ -463,4 +448,32 @@ public class Main extends PApplet {
 
 	}
 
+	public void paintcharacter() {
+		PImage img = chdown[pv];
+		PImage img1 = chup[pv];
+		PImage img2 = chur[pv];
+		PImage img3 = chul[pv];
+		if (still == true) {
+			image(ch, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+		}
+
+		if (up == true) {
+			image(img1, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+		}
+		if (down == true) {
+			image(img, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+		}
+		if (right == true) {
+			image(img2, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+		}
+		if (left == true) {
+			image(img3, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+		}
+		if (frameCount % 17 == 0) {
+			pv++;
+			if (pv == 3) {
+				pv = 0;
+			}
+		}
+	}
 }// cierra main

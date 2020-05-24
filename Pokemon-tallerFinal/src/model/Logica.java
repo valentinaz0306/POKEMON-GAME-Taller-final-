@@ -33,6 +33,7 @@ public class Logica {
 	
 
 	private Personaje persona;
+	private Pokemon torchi;
 
 	// arralist para registar usuarios
 	private ArrayList<Jugador> users;
@@ -51,40 +52,6 @@ public class Logica {
 		getPersona().move();
 	}
 
-	// Method to move that Character in map screen
-	public void movePersonaje(char e) {
-	
-		
-		/*Par currentPar = persona.converttoindex();
-		int i = 
-		int j =*/
-		
-		/*switch (e) {
-		case 'k':
-			persona.movedown();
-			System.out.println("down");
-			break;
-
-		case 'i':
-			persona.moveup();
-			System.out.println("up");
-			break;
-
-		case 'l':
-			persona.moveright();
-			System.out.println("right");
-			break;
-
-		case 'j':
-			persona.moveleft();
-			System.out.println("left");
-			break;
-
-		default:
-			break;
-		}*/
-	}
-	
 	
 	public void changemovstate(char dir) {
 		getPersona().setDirection(dir);
@@ -96,6 +63,11 @@ public class Logica {
 
 		setPersona(new Personaje(300, 50,mapa, app));
 	};
+	
+	// Mothod to create the OBJECT Pokemon
+	public void loadTorchi() {
+		setTorchi(new Pokemon("fire","torchi", 5, 200, 0, false));
+	}
 
 	public void generarPokemon() {
 
@@ -220,4 +192,16 @@ public class Logica {
 	public void setPersona(Personaje persona) {
 		this.persona = persona;
 	}
+	
+	public Pokemon getTorchi() {
+		return torchi;
+	}
+
+	public void setTorchi(Pokemon torchi) {
+		this.torchi=torchi;
+	}
+	
+	
+	
+	
 }
