@@ -15,6 +15,7 @@ public class Personaje {
 	public int j;
 	public int mapa[][];
 	private char direction;
+	private int fight;
 	PApplet app;
 
 	public Personaje(int PosX, int PosY, int mapa[][], PApplet app) {
@@ -22,6 +23,7 @@ public class Personaje {
 		this.PosY = PosY;
 		this.mapa = mapa;
 		this.app = app;
+		this.setFight(0);
 	}
 
 	public void move() {
@@ -34,6 +36,11 @@ public class Personaje {
 			if (p.getI() > -1 && p.getI() < 7 && p.getJ() > -1 && p.getJ() < 12) {
 				if (mapa[p.getI()][p.getJ()] != 0) {
 					moveup();
+					if(mapa[p.getI()][p.getJ()] >= 3) {
+						setFight(mapa[i][j]);
+						System.out.println("lo que sea mani");
+					}
+					
 				} else {
 					direction = STILL;
 				}
@@ -41,12 +48,17 @@ public class Personaje {
 				direction = STILL;
 			}
 			
+			
 			break;
 		case DOWN:
 			p = converttoindex(this.PosX, this.PosY + 5);
 			if (p.getI() > -1 && p.getI() < 7 && p.getJ() > -1 && p.getJ() < 12) {
 				if (mapa[p.getI()][p.getJ()] != 0) {
 					movedown();
+					if(mapa[p.getI()][p.getJ()] == 3) {
+						setFight(mapa[i][j]);
+						System.out.println("lo que sea mani");
+					}
 				} else {
 					direction = STILL;
 				}
@@ -60,6 +72,10 @@ public class Personaje {
 			if (p.getI() > -1 && p.getI() < 7 && p.getJ() > -1 && p.getJ() < 12) {
 				if (mapa[p.getI()][p.getJ()] != 0) {
 					moveleft();
+					if(mapa[p.getI()][p.getJ()] == 3) {
+						setFight(mapa[i][j]);
+						System.out.println("lo que sea mani");
+					}
 				} else {
 					direction = STILL;
 				}
@@ -73,6 +89,10 @@ public class Personaje {
 			if (p.getI() > -1 && p.getI() < 7 && p.getJ() > -1 && p.getJ() < 12) {
 				if (mapa[p.getI()][p.getJ()] != 0) {
 					moveright();
+					if(mapa[p.getI()][p.getJ()] == 3) {
+						setFight(mapa[i][j]);
+						System.out.println("lo que sea mani");
+					}
 				} else {
 					direction = STILL;
 				}
@@ -134,6 +154,14 @@ public class Personaje {
 
 	public void setDirection(char direction) {
 		this.direction = direction;
+	}
+
+	public int getFight() {
+		return fight;
+	}
+
+	public void setFight(int fight) {
+		this.fight = fight;
 	}
 
 }

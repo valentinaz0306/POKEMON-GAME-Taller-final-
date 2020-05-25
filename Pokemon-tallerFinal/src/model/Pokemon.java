@@ -2,14 +2,14 @@ package model;
 
 public class Pokemon {
 
-	private String tipo;
+	private int tipo;
 	private String nombre;
 	private int nivel;
 	private int vida;
 	private int exp;
 	private boolean estado;
 
-	public Pokemon(String tipo, String nombre,int nivel, int vida, int exp,boolean estado) {
+	public Pokemon(int tipo, String nombre,int nivel, int vida, int exp,boolean estado) {
 		
 		this.tipo=tipo;
 		this.nombre=nombre;
@@ -25,13 +25,11 @@ public class Pokemon {
 	
 	/// gets and sets
 	
-	public String getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+
 
 	public String getNombre() {
 		return nombre;
@@ -71,6 +69,10 @@ public class Pokemon {
 
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
 	/// 

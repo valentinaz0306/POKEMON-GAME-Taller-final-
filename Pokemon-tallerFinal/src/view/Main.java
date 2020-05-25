@@ -22,7 +22,7 @@ public class Main extends PApplet {
 	private static boolean mensaje;
 
 	////
-	String info = "";
+	
 	Textfield username, password;
 	Textfield usernameR, emailR, passwordR, cPasswordR;
 
@@ -100,7 +100,7 @@ public class Main extends PApplet {
 	public void setup() {
 
 		logica = new Logica(this);
-		pokemon = new Pokemon(info, info, T, T, T, fpk);
+		//pokemon = new Pokemon(info, info, T, T, T, fpk);
 		// exception
 		mensaje = false;
 
@@ -251,7 +251,10 @@ public class Main extends PApplet {
 
 		case 4:
 			image(map, 0, 0);
+			if(logica.character()>=3) {
 			logica.character();
+			pantalla=5;
+			}
 			paintcharacter();
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
@@ -279,7 +282,8 @@ public class Main extends PApplet {
 			//Enemy
 			fill(0);
 			textSize(25);
-			text("Enemy",74,75);
+			if(logica.character()==3) {
+				text("Enemy",74,75);
 			text(logica.getTorchi().getNombre(), 82, 122);
 			fill(0,255,0);
 			noStroke();
@@ -287,6 +291,7 @@ public class Main extends PApplet {
 			fill(0);
 			textSize(20);
 			text("lvl"+logica.getTorchi().getNivel(), 355, 143);
+			}
 			
 			
 			
