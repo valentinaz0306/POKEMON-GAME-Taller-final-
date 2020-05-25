@@ -68,8 +68,11 @@ public class Logica {
 	};
 	
 	// Mothod to create the OBJECT Pokemon
-	public void loadTorchi() {
+	public void loadPokemon() {
 		setTorchi(new Pokemon(persona.getFight(),"Torchi", 5, 200, 0, false));
+		setPlant(new Pokemon(persona.getFight(),"Plant",5,200,0,false));
+		setWater(new Pokemon(persona.getFight(),"Water",5,200,0,false));
+		
 		
 	}
 
@@ -214,6 +217,22 @@ public class Logica {
 
 	public void setPantalla(int pantalla) {
 		this.pantalla = pantalla;
+	}
+
+	public Pokemon getPlant() {
+		return Plant;
+	}
+
+	public void setPlant(Pokemon plant) {
+		Plant = plant;
+	}
+
+	public Pokemon getWater() {
+		return Water;
+	}
+
+	public void setWater(Pokemon water) {
+		Water = water;
 	}
 	
 	

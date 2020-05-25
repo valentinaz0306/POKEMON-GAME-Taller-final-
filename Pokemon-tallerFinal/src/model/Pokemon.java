@@ -21,8 +21,7 @@ public class Pokemon {
 	
 	////
 	
-	
-	
+
 	/// gets and sets
 	
 	public int getTipo() {
