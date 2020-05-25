@@ -55,7 +55,7 @@ public class Personaje {
 			if (p.getI() > -1 && p.getI() < 7 && p.getJ() > -1 && p.getJ() < 12) {
 				if (mapa[p.getI()][p.getJ()] != 0) {
 					movedown();
-					if(mapa[p.getI()][p.getJ()] == 3) {
+					if(mapa[p.getI()][p.getJ()] >= 3) {
 						setFight(mapa[i][j]);
 						System.out.println("lo que sea mani");
 					}
@@ -72,7 +72,7 @@ public class Personaje {
 			if (p.getI() > -1 && p.getI() < 7 && p.getJ() > -1 && p.getJ() < 12) {
 				if (mapa[p.getI()][p.getJ()] != 0) {
 					moveleft();
-					if(mapa[p.getI()][p.getJ()] == 3) {
+					if(mapa[p.getI()][p.getJ()] >= 3) {
 						setFight(mapa[i][j]);
 						System.out.println("lo que sea mani");
 					}
@@ -89,7 +89,7 @@ public class Personaje {
 			if (p.getI() > -1 && p.getI() < 7 && p.getJ() > -1 && p.getJ() < 12) {
 				if (mapa[p.getI()][p.getJ()] != 0) {
 					moveright();
-					if(mapa[p.getI()][p.getJ()] == 3) {
+					if(mapa[p.getI()][p.getJ()] >= 3) {
 						setFight(mapa[i][j]);
 						System.out.println("lo que sea mani");
 					}

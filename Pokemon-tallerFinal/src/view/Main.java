@@ -107,10 +107,10 @@ public class Main extends PApplet {
 		// Load sound
 		mapmusic = new SoundFile(this, "music/map.mp3");
 		fightmusic = new SoundFile(this, "music/fight.mp3");
-		/*mapmusic.amp((float) 0.1);
+		mapmusic.amp((float) 0.1);
 		mapmusic.play();
 		mapmusic.loop();
-		*/
+		
 
 		// Load images
 		start = loadImage("image/start.png");
@@ -251,8 +251,8 @@ public class Main extends PApplet {
 
 		case 4:
 			image(map, 0, 0);
-			if(logica.character()>=3) {
 			logica.character();
+			if(logica.getPersona().getFight()>=3) {
 			pantalla=5;
 			}
 			paintcharacter();
@@ -282,7 +282,7 @@ public class Main extends PApplet {
 			//Enemy
 			fill(0);
 			textSize(25);
-			if(logica.character()==3) {
+			if(logica.getPersona().getFight()==3) {
 				text("Enemy",74,75);
 			text(logica.getTorchi().getNombre(), 82, 122);
 			fill(0,255,0);
@@ -361,12 +361,12 @@ public class Main extends PApplet {
 
 			}
 
-		/*	if (pantalla == 4) {
+			if (pantalla == 4) {
 				mapmusic.stop();
 				fightmusic.amp((float) 0.05);
 				fightmusic.play();
 
-			}*/
+			}
 			pantalla++;
 		}
 

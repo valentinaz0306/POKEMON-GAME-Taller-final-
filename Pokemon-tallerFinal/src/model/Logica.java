@@ -50,9 +50,9 @@ public class Logica {
 	}
 
 	// Method Paint the Character in map screen
-	public int character() {
+	public void character() {
 		getPersona().move();
-		return getPersona().getFight();
+		
 	}
 
 	
