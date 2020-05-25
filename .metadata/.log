@@ -85,3 +85,42 @@ Java Model Exception: Java Model Status [Pokemon(String) [in Pokemon [in [Workin
 	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:169)
 !SUBENTRY 1 org.eclipse.jdt.core 4 969 2020-05-20 00:15:03.163
 !MESSAGE Pokemon(String) [in Pokemon [in [Working copy] Pokemon.java [in model [in src [in Pokemon-tallerFinal]]]]] does not exist
+!SESSION 2020-05-24 01:17:17.870 -----------------------------------------------
+eclipse.buildId=4.12.0.I20190605-1800
+java.version=1.8.0_221
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=es_CO
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/valentinazapata/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/valentinazapata/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2020-05-24 01:17:38.217
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.egit.core 1 0 2020-05-24 01:17:38.251
+!MESSAGE Using Apache MINA sshd as ssh client.
+!SESSION 2020-05-24 19:45:26.975 -----------------------------------------------
+eclipse.buildId=4.12.0.I20190605-1800
+java.version=1.8.0_221
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=es_CO
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/valentinazapata/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/valentinazapata/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2020-05-24 19:45:43.740
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.egit.core 1 0 2020-05-24 19:45:43.781
+!MESSAGE Using Apache MINA sshd as ssh client.
+!SESSION 2020-05-24 20:06:21.508 -----------------------------------------------
+eclipse.buildId=4.12.0.I20190605-1800
+java.version=1.8.0_221
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=es_CO
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/valentinazapata/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/valentinazapata/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2020-05-24 20:06:34.510
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.egit.core 1 0 2020-05-24 20:06:34.572
+!MESSAGE Using Apache MINA sshd as ssh client.
