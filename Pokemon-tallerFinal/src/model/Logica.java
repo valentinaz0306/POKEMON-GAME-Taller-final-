@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import processing.core.PApplet;
 import processing.core.PImage;
+import threads.ChronometerThread;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,6 +17,7 @@ import java.util.Set;
 public class Logica {
 	public final static int SIZE_MATRIX=100;
 	PApplet app;
+
 	private int pantalla=0;
 	public int fila = 7;
 	public int col = 12;
@@ -37,6 +39,7 @@ public class Logica {
 	private Pokemon torchi;
 	private Pokemon Plant;
 	private Pokemon Water;
+	private Chronometer crono;
 
 	// arralist para registar usuarios
 	private ArrayList<Jugador> users;
@@ -45,6 +48,7 @@ public class Logica {
 		this.app = app;
 		loadUsers();
 		generarPokemon();
+		crono = new Chronometer(); 
 		// System.out.println(mapa.length+ " "+ mapa[0].length);
 
 	}
@@ -53,6 +57,14 @@ public class Logica {
 	public void character() {
 		getPersona().move();
 		
+	}
+	
+	
+	public void Starttimer() {
+		 ChronometerThread cT=new ChronometerThread(crono);
+	        cT.setDaemon(true);
+	        cT.start();
+	        System.out.println("a contar");
 	}
 
 	
@@ -234,7 +246,16 @@ public class Logica {
 	public void setWater(Pokemon water) {
 		Water = water;
 	}
-	
+
+	public Chronometer getCrono() {
+		return crono;
+	}
+
+	public void setCrono(Chronometer crono) {
+		this.crono = crono;
+	}
+
+
 	
 	
 	

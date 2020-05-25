@@ -169,7 +169,7 @@ public class Main extends PApplet {
 
 		// Load int variables
 		pantalla = 0;
-		btnfight=0;
+		btnfight = 0;
 		pv = 0;
 
 		// load boolean variables
@@ -216,7 +216,7 @@ public class Main extends PApplet {
 			break;
 
 		case 1:
-
+			
 			image(start, 0, 0);
 			image(dim, 0, 0);
 			username.show();
@@ -275,7 +275,6 @@ public class Main extends PApplet {
 			text("Doc", 870, 530);
 			String m = "Choose your Pokemon, your little buddy will help you in this adventure";
 			text(m, 151, 595);
-			
 
 			break;
 
@@ -404,7 +403,7 @@ public class Main extends PApplet {
 
 			// Fight menu
 			image(fightmenu, 0, 0);
-			switch(btnfight) {
+			switch (btnfight) {
 			case 0:
 				textSize(30);
 				image(fboton1, 0, 0);
@@ -413,21 +412,26 @@ public class Main extends PApplet {
 				text("Fight", 775, 578);
 				text("Pokeball", 950, 578);
 				text("Run", 775, 630);
-				
+
 				break;
-				
-			case 1: 
+
+			case 1:
 				image(fboton1, 0, 0);
 				image(fboton2, 0, 0);
 				break;
 			}
-			
+
 			textSize(20);
 			text("What is your next move?", 103, 556, 598, 647);
 
-			break;
-
+			break;	
 		}// cierre switch
+		
+		
+		
+		String t=logica.getCrono().getTime();
+		fill(0);
+		text(t,1104,30);
 
 		fill(255);
 		text("X:" + mouseX + "Y:" + mouseY, mouseX, mouseY);
@@ -454,46 +458,41 @@ public class Main extends PApplet {
 			fpk = false;
 
 		}
-		if(pantalla==3) {
-			
-		if ((mouseX > 555 && mouseX < 693) && (mouseY > 526 && mouseY < 567)) {
-			exit();
-		}	
-		
-		if ((mouseX > 802 && mouseX < 928) && (mouseY > 528 && mouseY < 567)) {
-			pantalla=4;
-		}	
-		
+		if (pantalla == 3) {
+
+			if ((mouseX > 555 && mouseX < 693) && (mouseY > 526 && mouseY < 567)) {
+				exit();
+			}
+
+			if ((mouseX > 802 && mouseX < 928) && (mouseY > 528 && mouseY < 567)) {
+				pantalla = 4;
+			}
+
 		}
-		
-		
-		
-		if(pantalla==6) {
+
+		if (pantalla == 6) {
 			if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
-				btnfight=1;
-			}	
+				btnfight = 1;
+			}
 			if ((mouseX > 945 && mouseX < 1080) && (mouseY > 553 && mouseY < 584)) {
-				
-			}	
+
+			}
 			if ((mouseX > 758 && mouseX < 876) && (mouseY > 608 && mouseY < 641)) {
-				pantalla=5;
-			}	
-			
-			
+				pantalla = 5;
+			}
+
 		}
-		
-		
-		
-		
-		
 
 	}
 
 	public void keyPressed() {
 		if (key == ENTER) {
 
-			if (pantalla == 4) {
+			if (pantalla == 1) {
+				logica.Starttimer();
+			}
 
+			if (pantalla == 4) {
 				logica.addUsuario(username.getText());
 				mapmusic.stop();
 				homemusic.amp((float) 0.05);
