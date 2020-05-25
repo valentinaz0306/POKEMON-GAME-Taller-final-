@@ -61,6 +61,10 @@ public class Main extends PApplet {
 	PImage fboton1;
 	PImage fboton2;
 	PImage fboton3;
+	PImage botons;
+	PImage doc;
+	PImage enemy;
+	PImage intro;
 
 	int chnum = 4; // number of images
 	PImage[] chdown = new PImage[chnum]; // ? just copied someone else's on a forum don't really get this line
@@ -143,6 +147,10 @@ public class Main extends PApplet {
 		fboton1 = loadImage("image/fboton1.png");
 		fboton2 = loadImage("image/fboton2.png");
 		fboton3 = loadImage("image/fboton3.png");
+		botons = loadImage("image/botons.png");
+		enemy = loadImage("image/enemy.png");
+		doc = loadImage("image/doc.png");
+		intro = loadImage("image/intro.png");
 
 		for (int i = 0; i < 3; i++) {
 			chdown[i] = loadImage("image/sprite/chdown" + i + ".png");
@@ -235,6 +243,13 @@ public class Main extends PApplet {
 			break;
 
 		case 3:
+			image(bg1, 0, 0);
+			image(dim, 0, 0);
+			image(intro, 0, 0);
+			
+			break;
+			
+		case 4:
 
 			image(bg1, 0, 0);
 			image(dim, 0, 0);
@@ -249,7 +264,7 @@ public class Main extends PApplet {
 
 			break;
 
-		case 4:
+		case 5:
 			image(map, 0, 0);
 			logica.character();
 			if(logica.getPersona().getFight()>=3) {
@@ -264,7 +279,7 @@ public class Main extends PApplet {
 
 			break;
 
-		case 5:
+		case 6:
 			image(map, 0, 0);
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
@@ -361,7 +376,7 @@ public class Main extends PApplet {
 
 			}
 
-			if (pantalla == 4) {
+			if (pantalla == 5) {
 				mapmusic.stop();
 				fightmusic.amp((float) 0.05);
 				fightmusic.play();
