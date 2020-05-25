@@ -25,12 +25,10 @@ public class Main extends PApplet {
 	String info = "";
 	Textfield username, password;
 	Textfield usernameR, emailR, passwordR, cPasswordR;
-	
-	
-	//Sound variables
+
+	// Sound variables
 	SoundFile mapmusic;
-	
-	
+	SoundFile fightmusic;
 
 	// Image variables
 	PImage start;
@@ -40,6 +38,7 @@ public class Main extends PApplet {
 	PImage mapobject;
 	PImage bg1;
 	PImage dim;
+	PImage dimwhite;
 	PImage arrow;
 	PImage box;
 	PImage dialoguebox;
@@ -53,13 +52,22 @@ public class Main extends PApplet {
 	PImage wpoke;
 	PImage gpoke;
 	PImage fpoke;
+	PImage wpokeme;
+	PImage gpokeme;
+	PImage fpokeme;
+	PImage wpokefight;
+	PImage gpokefight;
+	PImage fpokefight;
+	PImage fboton1;
+	PImage fboton2;
+	PImage fboton3;
 
 	int chnum = 4; // number of images
 	PImage[] chdown = new PImage[chnum]; // ? just copied someone else's on a forum don't really get this line
 	PImage[] chup = new PImage[chnum];
 	PImage[] chur = new PImage[chnum];
 	PImage[] chul = new PImage[chnum];
-	
+
 	// Int variables
 
 	int pantalla;
@@ -95,15 +103,14 @@ public class Main extends PApplet {
 		pokemon = new Pokemon(info, info, T, T, T, fpk);
 		// exception
 		mensaje = false;
-		
-		
-		//Load sound 
-		mapmusic = new SoundFile(this,"music/map.mp3");
+
+		// Load sound
+		mapmusic = new SoundFile(this, "music/map.mp3");
+		fightmusic = new SoundFile(this, "music/fight.mp3");
+		/*mapmusic.amp((float) 0.1);
 		mapmusic.play();
-		if(mapmusic.isPlaying()) {
-			mapmusic.play();
-		}
-		
+		mapmusic.loop();
+		*/
 
 		// Load images
 		start = loadImage("image/start.png");
@@ -112,6 +119,7 @@ public class Main extends PApplet {
 		mapshadows = loadImage("image/mapshadows.png");
 		mapobject = loadImage("image/mapobject.png");
 		dim = loadImage("image/dim.png");
+		dimwhite = loadImage("image/dimwhite.png");
 		bg1 = loadImage("image/bg1.png");
 		arrow = loadImage("image/arrow.png");
 		box = loadImage("image/box.png");
@@ -126,6 +134,15 @@ public class Main extends PApplet {
 		fpoke = loadImage("image/fpoke.png");
 		gpoke = loadImage("image/gpoke.png");
 		wpoke = loadImage("image/wpoke.png");
+		fpokeme = loadImage("image/fpokeme.png");
+		gpokeme = loadImage("image/gpokeme.png");
+		wpokeme = loadImage("image/wpokeme.png");
+		fpokefight = loadImage("image/fpokefight.png");
+		gpokefight = loadImage("image/gpokefight.png");
+		wpokefight = loadImage("image/wpokefight.png");
+		fboton1 = loadImage("image/fboton1.png");
+		fboton2 = loadImage("image/fboton2.png");
+		fboton3 = loadImage("image/fboton3.png");
 
 		for (int i = 0; i < 3; i++) {
 			chdown[i] = loadImage("image/sprite/chdown" + i + ".png");
@@ -153,7 +170,7 @@ public class Main extends PApplet {
 		down = false;
 		right = false;
 		left = false;
-		still=true;
+		still = true;
 
 		/// usuarios
 
@@ -167,6 +184,7 @@ public class Main extends PApplet {
 				.setColorCaptionLabel(0).setColorForeground(0);
 
 		logica.loadPersonaje();
+		logica.loadTorchi();
 
 	}
 
@@ -234,40 +252,68 @@ public class Main extends PApplet {
 		case 4:
 			image(map, 0, 0);
 			logica.character();
-			PImage img = chdown[pv];
-			PImage img1 = chup[pv];
-			PImage img2 = chur[pv];
-			PImage img3 = chul[pv];
-			
-			
-			
-			if (still == true) {
-				image(ch, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
-			}
-			
-			if (up == true) {
-				image(img1, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
-			}
-			if (down == true) {
-				image(img, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
-			}
-			if (right == true) {
-				image(img2, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
-			}
-			if (left == true) {
-				image(img3, logica.getPersona().PosX, logica.getPersona().PosY, 50, 50);
-			}
-			if (frameCount % 17 == 0) {
-				pv++;
-				if (pv == 3) {
-					pv = 0;
-				}
-			}
+			paintcharacter();
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
 			username.hide();
 
 			;
+
+			break;
+
+		case 5:
+			image(map, 0, 0);
+			image(mapshadows, 0, 0);
+			image(mapobject, 0, 0);
+			image(dimwhite,0, 0);
+			image(fpokefight, 0, 0);
+			image(gpokefight, 0, 0);
+			image(wpokefight, 0, 0);
+			image(fpokeme, 0, 0);
+			image(gpokeme, 0, 0);
+			image(wpokeme, 0, 0);
+			image(fightbox, 0, 0);
+			image(fightmenu, 0, 0);
+			
+			
+			//Enemy
+			fill(0);
+			textSize(25);
+			text("Enemy",74,75);
+			text(logica.getTorchi().getNombre(), 82, 122);
+			fill(0,255,0);
+			noStroke();
+			rect(80, 130, logica.getTorchi().getVida(), 20,20);
+			fill(0);
+			textSize(20);
+			text("lvl"+logica.getTorchi().getNivel(), 355, 143);
+			
+			
+			
+			
+			//Character
+			fill(0);
+			textSize(25);
+			text("You",1055,389);
+			text("Your pokemon", 785, 435);
+			fill(0,255,0);
+			noStroke();
+			rect(781, 448, logica.getTorchi().getVida(), 20,20);
+			fill(0);
+			textSize(20);
+			text("lvl"+logica.getTorchi().getNivel(), 1085, 468);
+			
+			
+			//Fight menu
+			image(fboton1,0,0);
+			image(fboton2,0,0);
+			image(fboton3,0,0);
+			textSize(30);
+			text("Fight",775,578);
+			text("Pokeball",950,578);
+			text("Run",775,630);
+			textSize(20);
+			text("What is your next move?",103,556,598,647);
 
 			break;
 
@@ -309,6 +355,13 @@ public class Main extends PApplet {
 				logica.addUsuario(username.getText());
 
 			}
+
+		/*	if (pantalla == 4) {
+				mapmusic.stop();
+				fightmusic.amp((float) 0.05);
+				fightmusic.play();
+
+			}*/
 			pantalla++;
 		}
 
@@ -350,7 +403,7 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = false;
-			still=false;
+			still = false;
 		}
 		if (key == 'j') {
 			logica.changemovstate(Personaje.LEFT);
@@ -358,7 +411,7 @@ public class Main extends PApplet {
 			left = true;
 			right = false;
 			down = false;
-			still=false;
+			still = false;
 		}
 		if (key == 'k') {
 			logica.changemovstate(Personaje.DOWN);
@@ -366,7 +419,7 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = true;
-			still=false;
+			still = false;
 		}
 		if (key == 'l') {
 			logica.changemovstate(Personaje.RIGHT);
@@ -374,7 +427,7 @@ public class Main extends PApplet {
 			left = false;
 			right = true;
 			down = false;
-			still=false;
+			still = false;
 		}
 
 	}
@@ -387,7 +440,7 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = false;
-			still=true;
+			still = true;
 		}
 		if (key == 'j') {
 			logica.changemovstate(Personaje.STILL);
@@ -395,7 +448,7 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = false;
-			still=true;
+			still = true;
 		}
 		if (key == 'k') {
 			logica.changemovstate(Personaje.STILL);
@@ -403,7 +456,7 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = false;
-			still=true;
+			still = true;
 		}
 		if (key == 'l') {
 			logica.changemovstate(Personaje.STILL);
@@ -411,12 +464,8 @@ public class Main extends PApplet {
 			left = false;
 			right = false;
 			down = false;
-			still=true;
+			still = true;
 		}
-
-	}
-
-	public void keyCode() {
 
 	}
 
@@ -463,4 +512,32 @@ public class Main extends PApplet {
 
 	}
 
+	public void paintcharacter() {
+		PImage img = chdown[pv];
+		PImage img1 = chup[pv];
+		PImage img2 = chur[pv];
+		PImage img3 = chul[pv];
+		if (still == true) {
+			image(ch, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+		}
+
+		if (up == true) {
+			image(img1, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+		}
+		if (down == true) {
+			image(img, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+		}
+		if (right == true) {
+			image(img2, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+		}
+		if (left == true) {
+			image(img3, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+		}
+		if (frameCount % 17 == 0) {
+			pv++;
+			if (pv == 3) {
+				pv = 0;
+			}
+		}
+	}
 }// cierra main
