@@ -18,9 +18,11 @@ public class Main extends PApplet {
 	private ControlP5 cp5;
 	private Logica logica;
 	private Pokemon pokemon;
-	// mensaje para excepción
+	// mensaje para excepeción
 	private static boolean mensaje;
 
+	private String reporte;
+	private String reportePoke;
 	////
 
 	Textfield username, password;
@@ -194,8 +196,6 @@ public class Main extends PApplet {
 				.setColor(color(255, 255, 255)).setColorBackground(0).setColorActive(0).setColorLabel(0)
 				.setColorCaptionLabel(0).setColorForeground(0);
 
-		logica.loadPersonaje();
-		logica.loadPokemon();
 
 	}
 
@@ -216,7 +216,7 @@ public class Main extends PApplet {
 			break;
 
 		case 1:
-			
+
 			image(start, 0, 0);
 			image(dim, 0, 0);
 			username.show();
@@ -234,7 +234,7 @@ public class Main extends PApplet {
 			username.hide();
 			image(tuto, 0, 0);
 
-			// condicional mensaje excepcion
+			// condicional excepcion
 
 			if (mensaje) {
 				fill(255);
@@ -252,7 +252,7 @@ public class Main extends PApplet {
 			image(dim, 0, 0);
 			image(intro, 0, 0);
 			image(botons, 400, 0);
-			String s = "Welcome to hhhh, in this island we have a huge number of species, but most of them are unknow, can you hep us searching for this pokemons?";
+			String s = "Welcome to MEMORI, in this island we have a huge number of species, but most of them are unknow, can you hep us searching for this pokemons?";
 			text(s, 553, 162, 430, 200);
 			text("NO", 592, 555);
 			text("YES", 833, 555);
@@ -284,7 +284,9 @@ public class Main extends PApplet {
 			System.out.println(logica.getPersona().getFight());
 			if (logica.getPersona().getFight() >= 3) {
 				System.out.println("cambioooooooo scren");
+				logica.guardarPokemon(logica.getPersona().getFight());
 				pantalla = 6;
+
 			}
 			paintcharacter();
 			image(mapshadows, 0, 0);
@@ -424,14 +426,34 @@ public class Main extends PApplet {
 			textSize(20);
 			text("What is your next move?", 103, 556, 598, 647);
 
-			break;	
+			break;
+
+		// pantalla de ordenar nombre usuario
+		case 7:
+
+			background(0);
+			fill(255);
+			textSize(25);
+			text("para ordenar por nombre presionar la letra n", 100, 100);
+			text(reporte, 100, 150);
+
+			break;
+
+		// pantalla de ordenar pokemones pokedex
+		case 8:
+
+			background(0);
+			fill(255);
+			textSize(25);
+			text(reportePoke, 100, 150);
+
+			break;
+
 		}// cierre switch
-		
-		
-		
-		String t=logica.getCrono().getTime();
+
+		String t = logica.getCrono().getTime();
 		fill(0);
-		text(t,1104,30);
+		text(t, 1104, 30);
 
 		fill(255);
 		text("X:" + mouseX + "Y:" + mouseY, mouseX, mouseY);
@@ -489,11 +511,12 @@ public class Main extends PApplet {
 		if (key == ENTER) {
 
 			if (pantalla == 1) {
+
+				logica.addUsuario(username.getText());
 				logica.Starttimer();
 			}
 
 			if (pantalla == 4) {
-				logica.addUsuario(username.getText());
 				mapmusic.stop();
 				homemusic.amp((float) 0.05);
 				homemusic.play();
@@ -513,12 +536,12 @@ public class Main extends PApplet {
 			logica.probar();
 		}
 		// con d se ordena por fecha
-		if (key == 'd') {
+		if (key == 'f') {
 
 			logica.ordenarFecha();
 		}
 		// con f se ordena por nombre
-		if (key == 'f') {
+		if (key == 'n') {
 
 			logica.ordenarNombre();
 		}
@@ -532,6 +555,21 @@ public class Main extends PApplet {
 		if (key == 'p') {
 
 			logica.generarPokemon();
+
+		}
+
+		if (key == 'h') {
+
+			pantalla = 7;
+			reporte = logica.reporteUsuarios(); 
+
+		}
+		
+		if (key == 'o') {
+			
+			logica.ordenarPokemon();
+			reportePoke=logica.obtenerReport();
+			pantalla = 8;
 
 		}
 

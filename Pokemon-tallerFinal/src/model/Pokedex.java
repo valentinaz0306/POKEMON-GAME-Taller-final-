@@ -1,5 +1,42 @@
 package model;
 
-public class Pokedex {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-}
+public class Pokedex implements Serializable {
+
+	private List<Pokemon> pokemones;
+
+	public Pokedex() {
+		
+		pokemones= new ArrayList<Pokemon>();
+	}
+
+	public String reportePokemones() {
+
+		String r = "";
+
+		for (int i = 0; i < pokemones.size(); i++) {
+
+			Pokemon po = pokemones.get(i);
+			r += "" + po.getNombre() + "\n";
+		}
+
+		return r;
+	}
+	
+	public List<Pokemon> getPokemones() {
+		return pokemones;
+	}
+
+	public void setPokemones(List<Pokemon> pokemones) {
+		this.pokemones = pokemones;
+	}
+
+	public void añadirPokemon(Pokemon p) {
+	
+		pokemones.add(p);
+	}
+
+}// cierra clase

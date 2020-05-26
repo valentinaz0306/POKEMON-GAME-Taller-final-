@@ -11,44 +11,45 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Logica {
-	public final static int SIZE_MATRIX=100;
+	public final static int SIZE_MATRIX = 100;
 	PApplet app;
 
-	private int pantalla=0;
+	private int pantalla = 0;
 	public int fila = 7;
 	public int col = 12;
 	public int mapa[][] = {
 
-			{ 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0 }, 
-			{ 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-			{ 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 }, 
-			{ 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 },
-			{ 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 },
-			{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+			{ 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0 }, { 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+			{ 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 }, { 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 },
+			{ 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 }, { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 			{ 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1 },
 
 	};
-	
-	
 
 	private Personaje persona;
 	private Pokemon torchi;
 	private Pokemon Plant;
 	private Pokemon Water;
 	private Chronometer crono;
+	private Pokedex poke;
 
 	// arralist para registar usuarios
 	private ArrayList<Jugador> users;
 
 	public Logica(PApplet app) {
+		poke= new Pokedex();
 		this.app = app;
 		loadUsers();
 		generarPokemon();
-		crono = new Chronometer(); 
+		crono = new Chronometer();
+		loadPersonaje();
+		loadPokemon();
+		//loadPokedex();
 		// System.out.println(mapa.length+ " "+ mapa[0].length);
 
 	}
@@ -56,41 +57,50 @@ public class Logica {
 	// Method Paint the Character in map screen
 	public void character() {
 		getPersona().move();
-		
-	}
-	
-	
-	public void Starttimer() {
-		 ChronometerThread cT=new ChronometerThread(crono);
-	        cT.setDaemon(true);
-	        cT.start();
-	        System.out.println("a contar");
+
 	}
 
-	
+	public void Starttimer() {
+		ChronometerThread cT = new ChronometerThread(crono);
+		cT.setDaemon(true);
+		cT.start();
+		System.out.println("a contar");
+	}
+
 	public void changemovstate(char dir) {
 		getPersona().setDirection(dir);
 	}
-	
 
 	// Method to create the OBJECT Personaje
 	public void loadPersonaje() {
 
-		setPersona(new Personaje(300, 50,mapa, app));
-	};
-	
+		setPersona(new Personaje(300, 50, mapa, app));
+	}
+
 	// Mothod to create the OBJECT Pokemon
 	public void loadPokemon() {
-		setTorchi(new Pokemon(persona.getFight(),"Torchi", 5, 200, 0, false));
-		setPlant(new Pokemon(persona.getFight(),"Plant",5,200,0,false));
-		setWater(new Pokemon(persona.getFight(),"Water",5,200,0,false));
-		
-		
+		setTorchi(new Pokemon(persona.getFight(), "Torchi", 5, 200, 0, false));
+		setPlant(new Pokemon(persona.getFight(), "Plant", 5, 200, 0, false));
+		setWater(new Pokemon(persona.getFight(), "Water", 5, 200, 0, false));
+
+	}
+
+	public String reporteUsuarios() {
+
+		String r = "";
+
+		for (int i = 0; i < users.size(); i++) {
+
+			Jugador cu = users.get(i);
+			r += "" + cu.getUsername() + "  " + cu.getDate().getTime() + "\n";
+		}
+
+		return r;
 	}
 
 	public void generarPokemon() {
-		boolean[] numeros= new boolean[3];
-		
+		boolean[] numeros = new boolean[3];
+
 		boolean continuar = true;
 		Set<Par> generados = new HashSet<>();
 		Set<Integer> generados2 = new HashSet<>();
@@ -101,18 +111,18 @@ public class Logica {
 			Par p = new Par(i, j);
 			if (!generados.contains(p)) {
 				generados.add(p);
-				boolean next=true;
+				boolean next = true;
 				while (next) {
-					int x = (int) app.random(3,6);
-					if(!generados2.contains(x)) {
-					mapa[i][j] = x;
-					generados2.add(x);
-					next=false;
+					int x = (int) app.random(3, 6);
+					if (!generados2.contains(x)) {
+						mapa[i][j] = x;
+						generados2.add(x);
+						next = false;
 					}
 				}
-				
+
 			}
-			
+
 			if (generados.size() == 3) {
 				continuar = false;
 			}
@@ -137,12 +147,22 @@ public class Logica {
 
 	public void probar() {
 
-		for (int i = 0; i < mapa.length; i++) {
-			System.out.println();
-			for (int j = 0; j < mapa[0].length; j++) {
-				System.out.print(""+mapa[i][j]+"");
-			}
+		for (int i = 0; i < users.size(); i++) {
+			System.out.println(users.get(i).getUsername() + " Fecha:" + users.get(i).getDate().getTime());
 		}
+		// System.out.println(users.size());
+		// System.out.println("despues de ordenar");
+		// ordenarNombre();
+
+		for (int i = 0; i < users.size(); i++) {
+			System.out.println(users.get(i).getUsername() + " Fecha:" + users.get(i).getDate().getTime());
+		}
+
+		// mapaa
+		/*
+		 * for (int i = 0; i < mapa.length; i++) { System.out.println(); for (int j = 0;
+		 * j < mapa[0].length; j++) { System.out.print(""+mapa[i][j]+""); } }
+		 */
 	}
 
 	public String[] guardarTxt() {
@@ -179,6 +199,29 @@ public class Logica {
 
 	}
 
+	public void loadPokedex() {
+
+		// guarda archivo serializado
+		File f = new File("data/Pokemones.dat");
+		// comprobar si el archivo existe
+		if (!f.exists()) {
+			poke = new Pokedex();
+		} else {
+			try {
+				ObjectInputStream io = new ObjectInputStream(new FileInputStream(f));
+				poke = (Pokedex) io.readObject();
+				io.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 	public void saveUsers() {
 
 		try {
@@ -191,6 +234,41 @@ public class Logica {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void savePokemon() {
+
+		try {
+
+			ObjectOutputStream io = new ObjectOutputStream(new FileOutputStream(new File("data/Pokemones.dat")));
+			io.writeObject(poke);
+			io.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void guardarPokemon(int x) {
+
+		if (x == 3) {
+			poke.añadirPokemon(torchi);
+		} else if (x == 4) {
+			poke.añadirPokemon(Water);
+		} else {
+			poke.añadirPokemon(Plant);
+		}
+
+		//savePokemon();
+	}
+	
+	public void ordenarPokemon() {
+	Collections.sort(poke.getPokemones());
+	}
+
+	public String obtenerReport() {
+		return poke.reportePokemones();
 	}
 
 	////
@@ -214,13 +292,13 @@ public class Logica {
 	public void setPersona(Personaje persona) {
 		this.persona = persona;
 	}
-	
+
 	public Pokemon getTorchi() {
 		return torchi;
 	}
 
 	public void setTorchi(Pokemon torchi) {
-		this.torchi=torchi;
+		this.torchi = torchi;
 	}
 
 	public int getPantalla() {
@@ -255,8 +333,4 @@ public class Logica {
 		this.crono = crono;
 	}
 
-
-	
-	
-	
 }

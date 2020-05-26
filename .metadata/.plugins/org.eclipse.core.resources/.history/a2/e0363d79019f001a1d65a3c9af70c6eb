@@ -1,0 +1,26 @@
+package model;
+
+import java.io.Serializable;
+
+public class Pokedex implements Serializable {
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}// cierra clase 
