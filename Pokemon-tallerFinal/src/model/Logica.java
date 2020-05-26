@@ -16,6 +16,7 @@ import java.util.Set;
 public class Logica {
 	public final static int SIZE_MATRIX=100;
 	PApplet app;
+	private int pantalla=0;
 	public int fila = 7;
 	public int col = 12;
 	public int mapa[][] = {
@@ -34,6 +35,8 @@ public class Logica {
 
 	private Personaje persona;
 	private Pokemon torchi;
+	private Pokemon Plant;
+	private Pokemon Water;
 
 	// arralist para registar usuarios
 	private ArrayList<Jugador> users;
@@ -48,8 +51,8 @@ public class Logica {
 
 	// Method Paint the Character in map screen
 	public void character() {
-
 		getPersona().move();
+		
 	}
 
 	
@@ -66,13 +69,16 @@ public class Logica {
 	
 	// Mothod to create the OBJECT Pokemon
 	public void loadTorchi() {
-		setTorchi(new Pokemon("Fire","Torchi", 5, 200, 0, false));
+		setTorchi(new Pokemon(persona.getFight(),"Torchi", 5, 200, 0, false));
+		
 	}
 
 	public void generarPokemon() {
-
+		boolean[] numeros= new boolean[3];
+		
 		boolean continuar = true;
 		Set<Par> generados = new HashSet<>();
+		Set<Integer> generados2 = new HashSet<>();
 
 		while (continuar) {
 			int i = (int) (Math.random() * (4 - 2)) + 2;
@@ -80,8 +86,18 @@ public class Logica {
 			Par p = new Par(i, j);
 			if (!generados.contains(p)) {
 				generados.add(p);
-				mapa[i][j] = 3;
+				boolean next=true;
+				while (next) {
+					int x = (int) app.random(3,6);
+					if(!generados2.contains(x)) {
+					mapa[i][j] = x;
+					generados2.add(x);
+					next=false;
+					}
+				}
+				
 			}
+			
 			if (generados.size() == 3) {
 				continuar = false;
 			}
@@ -106,21 +122,12 @@ public class Logica {
 
 	public void probar() {
 
-		/*
-		 * for(int i = 0; i<mapa.length;i++){ System.out.println(" "); for(int j=0;
-		 * j<mapa[0].length; j++){ System.out.print(mapa[i][j]+" "); } }
-		 */
-		for (int i = 0; i < users.size(); i++) {
-			System.out.println(users.get(i).getUsername() + " Fecha:" + users.get(i).getDate().getTime());
+		for (int i = 0; i < mapa.length; i++) {
+			System.out.println();
+			for (int j = 0; j < mapa[0].length; j++) {
+				System.out.print(""+mapa[i][j]+"");
+			}
 		}
-		System.out.println(users.size());
-		System.out.println("despues de ordenar");
-		ordenarNombre();
-
-		for (int i = 0; i < users.size(); i++) {
-			System.out.println(users.get(i).getUsername() + " Fecha:" + users.get(i).getDate().getTime());
-		}
-
 	}
 
 	public String[] guardarTxt() {
@@ -199,6 +206,14 @@ public class Logica {
 
 	public void setTorchi(Pokemon torchi) {
 		this.torchi=torchi;
+	}
+
+	public int getPantalla() {
+		return pantalla;
+	}
+
+	public void setPantalla(int pantalla) {
+		this.pantalla = pantalla;
 	}
 	
 	
