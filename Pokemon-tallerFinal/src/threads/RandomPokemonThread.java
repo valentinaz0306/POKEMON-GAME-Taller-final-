@@ -1,0 +1,33 @@
+package threads;
+
+import model.Logica;
+
+public class RandomPokemonThread extends Thread{
+
+    private Logica logic;
+
+    public RandomPokemonThread(Logica logic) {
+        this.logic = logic;
+    }
+
+    @Override 
+    public void run() {
+
+        while(true) {
+            try {
+                sleep(20000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            logic.setDefaultMatrix();
+            logic.generarPokemon();
+            //logic.ppp();
+        }
+
+    }
+
+
+
+}

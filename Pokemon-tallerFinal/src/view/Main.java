@@ -13,12 +13,14 @@ import model.Personaje;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class Main extends PApplet {
 
 	private ControlP5 cp5;
 	private Logica logica;
 	private Pokemon pokemon;
-	// mensaje para excepeción
+	// mensaje para excepeciÃ³n
 	private static boolean mensaje;
 
 	private String reporte;
@@ -29,9 +31,9 @@ public class Main extends PApplet {
 	Textfield usernameR, emailR, passwordR, cPasswordR;
 
 	// Sound variables
-	SoundFile mapmusic;
-	SoundFile fightmusic;
-	SoundFile homemusic;
+	//SoundFile mapmusic;
+	//SoundFile fightmusic;
+	//SoundFile homemusic;
 
 	// Image variables
 	PImage start;
@@ -114,12 +116,13 @@ public class Main extends PApplet {
 		mensaje = false;
 
 		// Load sound
+		/*
 		mapmusic = new SoundFile(this, "music/map.mp3");
 		fightmusic = new SoundFile(this, "music/fight.mp3");
 		homemusic = new SoundFile(this, "music/home.mp3");
 		mapmusic.amp((float) 0.1);
 		mapmusic.play();
-		mapmusic.loop();
+		mapmusic.loop();*/
 
 		// Load images
 		start = loadImage("image/start.png");
@@ -188,7 +191,7 @@ public class Main extends PApplet {
 
 		/// usuarios
 
-		// SE AÑADE UN NUEVO USUARIO AL ARRAYLIST
+		// SE AÃ‘ADE UN NUEVO USUARIO AL ARRAYLIST
 		PFont font = createFont("PT Sans", 20);
 		cp5 = new ControlP5(this);
 
@@ -223,6 +226,7 @@ public class Main extends PApplet {
 			username.show();
 			textSize(50);
 			text("Set a nickname", 400, 150);
+		
 			textSize(25);
 			text("Press Enter to continue", 440, 650);
 
@@ -239,7 +243,7 @@ public class Main extends PApplet {
 
 			if (mensaje) {
 				fill(255);
-				text("Excedió el límite de caracteres", 400, 400);
+				text("ExcediÃ³ el lÃ­mite de caracteres", 400, 400);
 			}
 
 			/*
@@ -293,20 +297,20 @@ public class Main extends PApplet {
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
 			username.hide();
-			fightmusic.stop();
+		//	fightmusic.stop();
 			;
 
 			break;
 
 		case 6:
-
+/*
 			if (!firsttime) {
 				homemusic.stop();
 				fightmusic.amp((float) 0.05);
 				fightmusic.play();
 				fightmusic.loop();
 				firsttime = true;
-			}
+			}*/
 
 			image(map, 0, 0);
 			image(mapshadows, 0, 0);
@@ -513,18 +517,34 @@ public class Main extends PApplet {
 
 			if (pantalla == 1) {
 
-				logica.addUsuario(username.getText());
-				logica.Starttimer();
+				String name = username.getText();
+				
+				if(name.length()<=12&&name.length()>=3&&name!=null) {
+					logica.addUsuario(username.getText());
+					logica.Starttimer();
+					pantalla++;
+				}else {
+					try {
+						throw new NameException();
+					} catch (NameException e) {
+						// TODO Auto-generated catch block
+						//e.printStackTrace();
+						 JOptionPane.showMessageDialog(null, e.getMessage());
+					}
+				}
+			
+			}else {
+				pantalla++;
 			}
-
+/*
 			if (pantalla == 4) {
 				mapmusic.stop();
 				homemusic.amp((float) 0.05);
 				homemusic.play();
 
-			}
+			}*/
 
-			pantalla++;
+			
 		}
 
 		if (key == 'a') {
@@ -689,13 +709,12 @@ public class Main extends PApplet {
 
 		} catch (NameException e) {
 
-			System.out.println("Excedió el límite de caracteres");
+			System.out.println("Excedio el li­mite de caracteres");
 			// JOptionPane.showMessageDialog(null, "Hello World");
 			mensaje = true;
 		}
 
 	}
-
 	public void paintcharacter() {
 		PImage img = chdown[pv];
 		PImage img1 = chup[pv];

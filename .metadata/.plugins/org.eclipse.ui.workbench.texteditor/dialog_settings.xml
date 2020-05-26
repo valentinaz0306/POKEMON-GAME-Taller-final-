@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="get"/>
+		<item key="selection" value="System"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="get"/>
-			<item value="probar"/>
-			<item value="logica"/>
-			<item value="password"/>
+			<item value="system"/>
+			<item value="savepokemon"/>
+			<item value="loadpokedex"/>
+			<item value="loadpokemon"/>
+			<item value="load pokemon"/>
+			<item value="new Personaje"/>
+			<item value="load personaje"/>
+			<item value="new personaje"/>
+			<item value="persona"/>
+			<item value=" persona"/>
+			<item value="new persona"/>
+			<item value="save"/>
+			<item value="load Pokemon"/>
+			<item value="new pokemon"/>
+			<item value="savePokemon"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="fecha"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="902"/>
-		<item key="DIALOG_Y_ORIGIN" value="153"/>
+		<item key="DIALOG_X_ORIGIN" value="1093"/>
+		<item key="DIALOG_Y_ORIGIN" value="338"/>
 		<item key="DIALOG_WIDTH" value="290"/>
 		<item key="DIALOG_HEIGHT" value="409"/>
 		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>

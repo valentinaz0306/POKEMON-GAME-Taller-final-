@@ -4,6 +4,7 @@ import java.io.File;
 import processing.core.PApplet;
 import processing.core.PImage;
 import threads.ChronometerThread;
+import threads.RandomPokemonThread;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import exceptions.NameException;
 
 public class Logica {
 	public final static int SIZE_MATRIX = 100;
@@ -37,21 +40,28 @@ public class Logica {
 	private Pokemon Water;
 	private Chronometer crono;
 	private Pokedex poke;
+	private RandomPokemonThread rPt;
 
 	// arralist para registar usuarios
 	private ArrayList<Jugador> users;
 
 	public Logica(PApplet app) {
-		poke= new Pokedex(app);
+		poke = new Pokedex(app);
 		this.app = app;
 		loadUsers();
 		generarPokemon();
 		crono = new Chronometer();
 		loadPersonaje();
 		loadPokemon();
-		//loadPokedex();
+		// loadPokedex();
 		// System.out.println(mapa.length+ " "+ mapa[0].length);
 
+		// hilo mov pokemones
+
+		rPt = new RandomPokemonThread(this);
+		rPt.setDaemon(true);
+		rPt.start();
+		
 	}
 
 	// Method Paint the Character in map screen
@@ -199,7 +209,28 @@ public class Logica {
 
 	}
 
-	
+	public void ppp() {
+		for (int s = 0; s < mapa.length; s++) {
+			System.out.println("");
+			for (int k = 0; k < mapa[0].length; k++) {
+				System.out.print(mapa[s][k] + " ");
+			}
+		}
+		System.out.println("");
+	}
+
+	public void setDefaultMatrix() {
+		int[][] defaultMatrix = {
+
+				{ 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0 }, { 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+				{ 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 }, { 0, 0, 1, 1, 2, 2, 2, 2, 1, 1, 0, 0 },
+				{ 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 }, { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+				{ 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1 },
+
+		};
+
+		this.mapa = defaultMatrix;
+	}
 
 	public void saveUsers() {
 
@@ -218,7 +249,6 @@ public class Logica {
 	public void guardarPkmnTxt() {
 		poke.escribirTxt();
 	}
-	
 
 	public void guardarPokemon(int x) {
 
@@ -230,11 +260,11 @@ public class Logica {
 			poke.añadirPokemon(Plant);
 		}
 
-		//savePokemon();
+		// savePokemon();
 	}
-	
+
 	public void ordenarPokemon() {
-	Collections.sort(poke.getPokemones());
+		Collections.sort(poke.getPokemones());
 	}
 
 	public String obtenerReport() {
