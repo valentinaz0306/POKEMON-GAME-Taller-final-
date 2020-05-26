@@ -5,6 +5,7 @@ import processing.core.PImage;
 import processing.sound.SoundFile;
 import processing.core.PFont;
 import controlP5.*;
+import exceptions.LifeException;
 import exceptions.NameException;
 import model.Jugador;
 import model.Logica;
@@ -31,9 +32,9 @@ public class Main extends PApplet {
 	Textfield usernameR, emailR, passwordR, cPasswordR;
 
 	// Sound variables
-	//SoundFile mapmusic;
-	//SoundFile fightmusic;
-	//SoundFile homemusic;
+	// SoundFile mapmusic;
+	// SoundFile fightmusic;
+	// SoundFile homemusic;
 
 	// Image variables
 	PImage start;
@@ -83,6 +84,9 @@ public class Main extends PApplet {
 	int btnfight;
 	int T;
 	int pv;
+	int vidaT;
+	int vidaP;
+	int vidaW;
 
 	// boolean
 	boolean fpk;
@@ -110,19 +114,18 @@ public class Main extends PApplet {
 	public void setup() {
 
 		logica = new Logica(this);
-		
+
 		// pokemon = new Pokemon(info, info, T, T, T, fpk);
 		// exception
 		mensaje = false;
 
 		// Load sound
 		/*
-		mapmusic = new SoundFile(this, "music/map.mp3");
-		fightmusic = new SoundFile(this, "music/fight.mp3");
-		homemusic = new SoundFile(this, "music/home.mp3");
-		mapmusic.amp((float) 0.1);
-		mapmusic.play();
-		mapmusic.loop();*/
+		 * mapmusic = new SoundFile(this, "music/map.mp3"); fightmusic = new
+		 * SoundFile(this, "music/fight.mp3"); homemusic = new SoundFile(this,
+		 * "music/home.mp3"); mapmusic.amp((float) 0.1); mapmusic.play();
+		 * mapmusic.loop();
+		 */
 
 		// Load images
 		start = loadImage("image/start.png");
@@ -177,6 +180,9 @@ public class Main extends PApplet {
 		pantalla = 0;
 		btnfight = 0;
 		pv = 0;
+		vidaT = logica.getTorchi().getVida();
+		vidaP = logica.getPlant().getVida();
+		vidaW = logica.getWater().getVida();
 
 		// load boolean variables
 		fpk = false;
@@ -199,7 +205,6 @@ public class Main extends PApplet {
 		username = cp5.addTextfield("Nombre").setPosition(481, 287).setSize(180, 38).setFont(font)
 				.setColor(color(255, 255, 255)).setColorBackground(0).setColorActive(0).setColorLabel(0)
 				.setColorCaptionLabel(0).setColorForeground(0);
-
 
 	}
 
@@ -226,7 +231,7 @@ public class Main extends PApplet {
 			username.show();
 			textSize(50);
 			text("Set a nickname", 400, 150);
-		
+
 			textSize(25);
 			text("Press Enter to continue", 440, 650);
 
@@ -286,9 +291,9 @@ public class Main extends PApplet {
 		case 5:
 			image(map, 0, 0);
 			logica.character();
-			//System.out.println(logica.getPersona().getFight());
+			// System.out.println(logica.getPersona().getFight());
 			if (logica.getPersona().getFight() >= 3) {
-				//System.out.println("cambioooooooo scren");
+				// System.out.println("cambioooooooo scren");
 				logica.guardarPokemon(logica.getPersona().getFight());
 				pantalla = 6;
 
@@ -297,20 +302,16 @@ public class Main extends PApplet {
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
 			username.hide();
-		//	fightmusic.stop();
+			// fightmusic.stop();
 			;
 
 			break;
 
 		case 6:
-/*
-			if (!firsttime) {
-				homemusic.stop();
-				fightmusic.amp((float) 0.05);
-				fightmusic.play();
-				fightmusic.loop();
-				firsttime = true;
-			}*/
+			/*
+			 * if (!firsttime) { homemusic.stop(); fightmusic.amp((float) 0.05);
+			 * fightmusic.play(); fightmusic.loop(); firsttime = true; }
+			 */
 
 			image(map, 0, 0);
 			image(mapshadows, 0, 0);
@@ -327,7 +328,7 @@ public class Main extends PApplet {
 				text("Your pokemon", 785, 435);
 				fill(0, 255, 0);
 				noStroke();
-				rect(781, 448, logica.getTorchi().getVida(), 20, 20);
+				rect(781, 448, vidaT, 20, 20);
 				fill(0);
 				textSize(20);
 				text("lvl" + logica.getTorchi().getNivel(), 1085, 468);
@@ -342,7 +343,7 @@ public class Main extends PApplet {
 				text("Your pokemon", 785, 435);
 				fill(0, 255, 0);
 				noStroke();
-				rect(781, 448, logica.getPlant().getVida(), 20, 20);
+				rect(781, 448, vidaP, 20, 20);
 				fill(0);
 				textSize(20);
 				text("lvl" + logica.getPlant().getNivel(), 1085, 468);
@@ -357,7 +358,7 @@ public class Main extends PApplet {
 				text("Your pokemon", 785, 435);
 				fill(0, 255, 0);
 				noStroke();
-				rect(781, 448, logica.getWater().getVida(), 20, 20);
+				rect(781, 448, vidaW, 20, 20);
 				fill(0);
 				textSize(20);
 				text("lvl" + logica.getWater().getNivel(), 1085, 468);
@@ -370,9 +371,15 @@ public class Main extends PApplet {
 				text("Enemy", 74, 75);
 				image(fpokefight, 0, 0);
 				text(logica.getTorchi().getNombre(), 82, 122);
-				fill(0, 255, 0);
-				noStroke();
-				rect(80, 130, logica.getTorchi().getVida(), 20, 20);
+				if (vidaT > 50) {
+					fill(0, 255, 0);
+					noStroke();
+					rect(80, 130, vidaT, 20, 20);
+				} else {
+					fill(255, 0, 0);
+					noStroke();
+					rect(80, 130, vidaT, 20, 20);
+				}
 				fill(0);
 				textSize(20);
 				text("lvl" + logica.getTorchi().getNivel(), 355, 143);
@@ -385,9 +392,15 @@ public class Main extends PApplet {
 				text("Enemy", 74, 75);
 				image(wpokefight, 0, 0);
 				text(logica.getWater().getNombre(), 82, 122);
-				fill(0, 255, 0);
-				noStroke();
-				rect(80, 130, logica.getWater().getVida(), 20, 20);
+				if (vidaW > 50) {
+					fill(0, 255, 0);
+					noStroke();
+					rect(80, 130, vidaW, 20, 20);
+				} else {
+					fill(255, 0, 0);
+					noStroke();
+					rect(80, 130, vidaW, 20, 20);
+				}
 				fill(0);
 				textSize(20);
 				text("lvl" + logica.getWater().getNivel(), 355, 143);
@@ -400,9 +413,15 @@ public class Main extends PApplet {
 				text("Enemy", 74, 75);
 				image(gpokefight, 0, 0);
 				text(logica.getPlant().getNombre(), 82, 122);
-				fill(0, 255, 0);
-				noStroke();
-				rect(80, 130, logica.getPlant().getVida(), 20, 20);
+				if (vidaP > 50) {
+					fill(0, 255, 0);
+					noStroke();
+					rect(80, 130, vidaP, 20, 20);
+				} else {
+					fill(255, 0, 0);
+					noStroke();
+					rect(80, 130, vidaP, 20, 20);
+				}
 				fill(0);
 				textSize(20);
 				text("lvl" + logica.getPlant().getNivel(), 355, 143);
@@ -425,12 +444,16 @@ public class Main extends PApplet {
 			case 1:
 				image(fboton1, 0, 0);
 				image(fboton2, 0, 0);
+				text("Punch", 775, 578);
+				text("Super-Kick", 950, 578);
+				image(fboton3, 0, 0);
+				text("back", 775, 630);
 				break;
 			}
 
 			textSize(20);
 			text("What is your next move?", 103, 556, 598, 647);
-			
+
 			break;
 
 		// pantalla de ordenar nombre usuario
@@ -498,14 +521,69 @@ public class Main extends PApplet {
 		}
 
 		if (pantalla == 6) {
-			if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
-				btnfight = 1;
-			}
-			if ((mouseX > 945 && mouseX < 1080) && (mouseY > 553 && mouseY < 584)) {
+
+			if (btnfight == 0) {
+				if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
+					btnfight = 1;
+				}
+				if ((mouseX > 945 && mouseX < 1080) && (mouseY > 553 && mouseY < 584)) {
+					if(vidaT<55|vidaP<55|vidaW<55){
+					logica.guardarPkmnTxt();
+				} else {
+					try {
+						throw new LifeException();
+
+					} catch (LifeException e) {
+						// TODO Auto-generated catch block
+						// e.printStackTrace();
+						JOptionPane.showMessageDialog(null, e.getMessage());
+					}
+
+				}}
+				
+				if ((mouseX > 758 && mouseX < 876) && (mouseY > 608 && mouseY < 641)) {
+					logica.loadPersonaje();
+					vidaT = logica.getTorchi().getVida();
+					vidaP = logica.getPlant().getVida();
+					vidaW = logica.getWater().getVida();
+					btnfight = 0;
+					pantalla = 5;
+				}
 
 			}
-			if ((mouseX > 758 && mouseX < 876) && (mouseY > 608 && mouseY < 641)) {
-				pantalla = 5;
+
+			if (btnfight == 1) {
+				if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
+
+					if (logica.getPersona().getFight() == 3 && vidaT >= 20) {
+						vidaT -= 10;
+					}
+
+					if (logica.getPersona().getFight() == 4 && vidaW >= 20) {
+						vidaW -= 10;
+					}
+					if (logica.getPersona().getFight() == 5 && vidaP >= 20) {
+						vidaP -= 10;
+					}
+				}
+
+				if ((mouseX > 758 && mouseX < 876) && (mouseY > 608 && mouseY < 641)) {
+					btnfight = 0;
+				}
+				if ((mouseX > 945 && mouseX < 1080) && (mouseY > 553 && mouseY < 584)) {
+					if (logica.getPersona().getFight() == 3 && vidaT >= 20) {
+						vidaT -= 50;
+					}
+
+					if (logica.getPersona().getFight() == 4 && vidaW >= 20) {
+						vidaW -= 50;
+					}
+
+					if (logica.getPersona().getFight() == 5 && vidaP >= 20) {
+						vidaP -= 50;
+					}
+				}
+
 			}
 
 		}
@@ -518,33 +596,31 @@ public class Main extends PApplet {
 			if (pantalla == 1) {
 
 				String name = username.getText();
-				
-				if(name.length()<=12&&name.length()>=3&&name!=null) {
+
+				if (name.length() <= 12 && name.length() >= 3 && name != null) {
 					logica.addUsuario(username.getText());
 					logica.Starttimer();
 					pantalla++;
-				}else {
+				} else {
 					try {
 						throw new NameException();
 					} catch (NameException e) {
 						// TODO Auto-generated catch block
-						//e.printStackTrace();
-						 JOptionPane.showMessageDialog(null, e.getMessage());
+						// e.printStackTrace();
+						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
 				}
-			
-			}else {
+
+			} else {
 				pantalla++;
 			}
-/*
-			if (pantalla == 4) {
-				mapmusic.stop();
-				homemusic.amp((float) 0.05);
-				homemusic.play();
+			/*
+			 * if (pantalla == 4) { mapmusic.stop(); homemusic.amp((float) 0.05);
+			 * homemusic.play();
+			 * 
+			 * }
+			 */
 
-			}*/
-
-			
 		}
 
 		if (key == 'a') {
@@ -582,14 +658,14 @@ public class Main extends PApplet {
 		if (key == 'h') {
 
 			pantalla = 7;
-			reporte = logica.reporteUsuarios(); 
+			reporte = logica.reporteUsuarios();
 
 		}
-		
+
 		if (key == 'o') {
-			
+
 			logica.ordenarPokemon();
-			reportePoke=logica.obtenerReport();
+			reportePoke = logica.obtenerReport();
 			pantalla = 8;
 
 		}
@@ -626,11 +702,9 @@ public class Main extends PApplet {
 			down = false;
 			still = false;
 		}
-		
-		if(key == 'y')
-			logica.guardarPkmnTxt();
 
 	}
+
 	// cierra key
 
 	public void keyReleased() {
@@ -715,6 +789,7 @@ public class Main extends PApplet {
 		}
 
 	}
+
 	public void paintcharacter() {
 		PImage img = chdown[pv];
 		PImage img1 = chup[pv];

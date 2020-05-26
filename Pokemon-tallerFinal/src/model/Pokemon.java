@@ -19,6 +19,7 @@ public class Pokemon implements Comparable <Pokemon> {
 		this.vida=vida;
 		this.exp=exp;
 		this.estado=estado;
+		
 	}
 	
 	////

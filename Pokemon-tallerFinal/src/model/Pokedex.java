@@ -68,7 +68,7 @@ public class Pokedex  {
 		this.pokemones = pokemones;
 	}
 
-	public void añadirPokemon(Pokemon p) {
+	public void anadirPokemon(Pokemon p) {
 		
 		if(p==null){
 			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx p es null");

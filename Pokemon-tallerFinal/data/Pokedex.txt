@@ -1,3 +1,7 @@
 0 Plant 5 200 0 false
+0 Plant 5 200 0 false
+0 Torchi 5 200 0 false
+0 Water 5 200 0 false
+0 Plant 5 200 0 false
 0 Torchi 5 200 0 false
 0 Plant 5 200 0 false

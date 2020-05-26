@@ -4,7 +4,7 @@ public class NameException extends Exception {
 
     public NameException() {
 
-        super("El numero de carateres debe estar entre 3 y 12 \n Porfavor ingrese un nuevo nombre");
+        super("The number of characters most be between 3 and 12 \n Please enter a new name");
 
     }
 }

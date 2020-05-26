@@ -253,11 +253,11 @@ public class Logica {
 	public void guardarPokemon(int x) {
 
 		if (x == 3) {
-			poke.añadirPokemon(torchi);
+			poke.anadirPokemon(torchi);
 		} else if (x == 4) {
-			poke.añadirPokemon(Water);
+			poke.anadirPokemon(Water);
 		} else {
-			poke.añadirPokemon(Plant);
+			poke.anadirPokemon(Plant);
 		}
 
 		// savePokemon();
