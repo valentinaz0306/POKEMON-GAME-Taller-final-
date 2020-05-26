@@ -12,7 +12,7 @@ public class Pokedex implements Serializable {
 
 	public Pokedex(PApplet app) {
 		this.app = app;
-		pokemones = new ArrayList<Pokemon>();
+		
 		loadTxt();
 	}
 
@@ -38,10 +38,6 @@ public class Pokedex implements Serializable {
 	}
 
 	public void añadirPokemon(Pokemon p) {
-		
-		if(p==null) {
-			System.out.println("El pokemon que me llega es nulo");
-		}
 
 		pokemones.add(p);
 	}
@@ -63,8 +59,8 @@ public class Pokedex implements Serializable {
 
 	public String [] getMsg() {
 
-		String[] p = new String[pokemones.size()+info.size()];
-		for (int i = 0; i < pokemones.size(); i++) {
+		String[] p = new String[pokemones.size()];
+		for (int i = info.size()-1; i < pokemones.size(); i++) {
 			String t = "Fuego";
 			if (pokemones.get(i).getTipo() == 4)
 				t = "Agua";
@@ -72,17 +68,8 @@ public class Pokedex implements Serializable {
 				t = "Planta";
 			}
 			p[i] = pokemones.get(i).getNombre() + " " + t;
-			System.out.println(""+ pokemones.get(i).getNombre() + " " + t+"    pokemones");
+			
 		}
-		
-		if(info.size()!=0) {
-			for (int i = 0; i <+info.size(); i++) {
-				p[i] = info.get(i+pokemones.size()-1);
-				System.out.println(""+info.get(i+pokemones.size()-1)+"        info");
-			}
-		}
-		
-		
 		return p;
 	}
 

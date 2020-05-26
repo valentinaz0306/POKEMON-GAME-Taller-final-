@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class Pokemon implements Comparable <Pokemon> {
+public class Pokemon implements Serializable, Comparable <Pokemon> {
 
 	private int tipo;
 	private String nombre;

@@ -108,7 +108,6 @@ public class Main extends PApplet {
 	public void setup() {
 
 		logica = new Logica(this);
-		
 		// pokemon = new Pokemon(info, info, T, T, T, fpk);
 		// exception
 		mensaje = false;
@@ -282,9 +281,9 @@ public class Main extends PApplet {
 		case 5:
 			image(map, 0, 0);
 			logica.character();
-			//System.out.println(logica.getPersona().getFight());
+			System.out.println(logica.getPersona().getFight());
 			if (logica.getPersona().getFight() >= 3) {
-				//System.out.println("cambioooooooo scren");
+				System.out.println("cambioooooooo scren");
 				logica.guardarPokemon(logica.getPersona().getFight());
 				pantalla = 6;
 
@@ -426,7 +425,7 @@ public class Main extends PApplet {
 
 			textSize(20);
 			text("What is your next move?", 103, 556, 598, 647);
-			
+
 			break;
 
 		// pantalla de ordenar nombre usuario
@@ -606,9 +605,6 @@ public class Main extends PApplet {
 			down = false;
 			still = false;
 		}
-		
-		if(key == 'y')
-			logica.guardarPkmnTxt();
 
 	}
 	// cierra key

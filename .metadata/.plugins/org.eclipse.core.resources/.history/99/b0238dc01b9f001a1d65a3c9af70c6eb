@@ -72,13 +72,12 @@ public class Pokedex implements Serializable {
 				t = "Planta";
 			}
 			p[i] = pokemones.get(i).getNombre() + " " + t;
-			System.out.println(""+ pokemones.get(i).getNombre() + " " + t+"    pokemones");
+			
 		}
 		
 		if(info.size()!=0) {
 			for (int i = 0; i <+info.size(); i++) {
-				p[i] = info.get(i+pokemones.size()-1);
-				System.out.println(""+info.get(i+pokemones.size()-1)+"        info");
+				p[i] = info.get(i+pokemones.size());
 			}
 		}
 		

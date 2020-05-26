@@ -42,7 +42,7 @@ public class Logica {
 	private ArrayList<Jugador> users;
 
 	public Logica(PApplet app) {
-		poke= new Pokedex(app);
+		poke= new Pokedex();
 		this.app = app;
 		loadUsers();
 		generarPokemon();
@@ -199,7 +199,28 @@ public class Logica {
 
 	}
 
-	
+	public void loadPokedex() {
+
+		// guarda archivo serializado
+		File f = new File("data/Pokemones.dat");
+		// comprobar si el archivo existe
+		if (!f.exists()) {
+			poke = new Pokedex();
+		} else {
+			try {
+				ObjectInputStream io = new ObjectInputStream(new FileInputStream(f));
+				poke = (Pokedex) io.readObject();
+				io.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
 
 	public void saveUsers() {
 
@@ -215,10 +236,19 @@ public class Logica {
 		}
 	}
 
-	public void guardarPkmnTxt() {
-		poke.escribirTxt();
+	public void savePokemon() {
+
+		try {
+
+			ObjectOutputStream io = new ObjectOutputStream(new FileOutputStream(new File("data/Pokemones.dat")));
+			io.writeObject(poke);
+			io.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
 
 	public void guardarPokemon(int x) {
 

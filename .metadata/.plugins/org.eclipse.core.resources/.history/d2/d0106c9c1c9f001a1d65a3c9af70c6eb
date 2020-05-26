@@ -91,7 +91,7 @@ public class Personaje {
 					moveright();
 					if(mapa[p.getI()][p.getJ()] >= 3) {
 						setFight(mapa[p.getI()][p.getJ()]);
-						//System.out.println("lo que sea mani");
+						System.out.println("lo que sea mani");
 					}
 				} else {
 					direction = STILL;

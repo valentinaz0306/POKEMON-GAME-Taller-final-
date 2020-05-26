@@ -215,9 +215,6 @@ public class Logica {
 		}
 	}
 
-	public void guardarPkmnTxt() {
-		poke.escribirTxt();
-	}
 	
 
 	public void guardarPokemon(int x) {

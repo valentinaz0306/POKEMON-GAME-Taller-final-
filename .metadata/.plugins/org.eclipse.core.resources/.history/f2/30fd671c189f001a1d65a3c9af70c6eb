@@ -42,7 +42,7 @@ public class Logica {
 	private ArrayList<Jugador> users;
 
 	public Logica(PApplet app) {
-		poke= new Pokedex(app);
+		poke= new Pokedex();
 		this.app = app;
 		loadUsers();
 		generarPokemon();
@@ -215,9 +215,6 @@ public class Logica {
 		}
 	}
 
-	public void guardarPkmnTxt() {
-		poke.escribirTxt();
-	}
 	
 
 	public void guardarPokemon(int x) {
