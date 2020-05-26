@@ -22,13 +22,14 @@ public class Main extends PApplet {
 	private static boolean mensaje;
 
 	////
-	
+
 	Textfield username, password;
 	Textfield usernameR, emailR, passwordR, cPasswordR;
 
 	// Sound variables
 	SoundFile mapmusic;
 	SoundFile fightmusic;
+	SoundFile homemusic;
 
 	// Image variables
 	PImage start;
@@ -75,6 +76,7 @@ public class Main extends PApplet {
 	// Int variables
 
 	int pantalla;
+	int btnfight;
 	int T;
 	int pv;
 
@@ -104,17 +106,17 @@ public class Main extends PApplet {
 	public void setup() {
 
 		logica = new Logica(this);
-		//pokemon = new Pokemon(info, info, T, T, T, fpk);
+		// pokemon = new Pokemon(info, info, T, T, T, fpk);
 		// exception
 		mensaje = false;
 
 		// Load sound
 		mapmusic = new SoundFile(this, "music/map.mp3");
 		fightmusic = new SoundFile(this, "music/fight.mp3");
+		homemusic = new SoundFile(this, "music/home.mp3");
 		mapmusic.amp((float) 0.1);
 		mapmusic.play();
 		mapmusic.loop();
-		
 
 		// Load images
 		start = loadImage("image/start.png");
@@ -167,6 +169,7 @@ public class Main extends PApplet {
 
 		// Load int variables
 		pantalla = 0;
+		btnfight = 0;
 		pv = 0;
 
 		// load boolean variables
@@ -192,9 +195,11 @@ public class Main extends PApplet {
 				.setColorCaptionLabel(0).setColorForeground(0);
 
 		logica.loadPersonaje();
-		logica.loadTorchi();
+		logica.loadPokemon();
 
 	}
+
+	boolean firsttime = false;
 
 	public void draw() {
 
@@ -211,7 +216,7 @@ public class Main extends PApplet {
 			break;
 
 		case 1:
-
+			
 			image(start, 0, 0);
 			image(dim, 0, 0);
 			username.show();
@@ -246,98 +251,187 @@ public class Main extends PApplet {
 			image(bg1, 0, 0);
 			image(dim, 0, 0);
 			image(intro, 0, 0);
-			
+			image(botons, 400, 0);
+			String s = "Welcome to hhhh, in this island we have a huge number of species, but most of them are unknow, can you hep us searching for this pokemons?";
+			text(s, 553, 162, 430, 200);
+			text("NO", 592, 555);
+			text("YES", 833, 555);
+
 			break;
-			
+
 		case 4:
 
 			image(bg1, 0, 0);
 			image(dim, 0, 0);
+
 			username.hide();
 			if (wpk == false && gpk == false && fpk == false) {
-				image(p1, 0, 0);
+				image(doc, 0, 50);
 			}
 			image(dialoguebox, 0, 50);
 			image(box, 0, 0);
 			hoverpokechoose();
 			image(pokeballs, 0, 0);
+			text("Doc", 870, 530);
+			String m = "Choose your Pokemon, your little buddy will help you in this adventure";
+			text(m, 151, 595);
 
 			break;
 
 		case 5:
 			image(map, 0, 0);
 			logica.character();
-			if(logica.getPersona().getFight()>=3) {
-			pantalla=5;
+			System.out.println(logica.getPersona().getFight());
+			if (logica.getPersona().getFight() >= 3) {
+				System.out.println("cambioooooooo scren");
+				pantalla = 6;
 			}
 			paintcharacter();
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
 			username.hide();
-
+			fightmusic.stop();
 			;
 
 			break;
 
 		case 6:
+
+			if (!firsttime) {
+				homemusic.stop();
+				fightmusic.amp((float) 0.05);
+				fightmusic.play();
+				fightmusic.loop();
+				firsttime = true;
+			}
+
 			image(map, 0, 0);
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
-			image(dimwhite,0, 0);
-			image(fpokefight, 0, 0);
-			image(gpokefight, 0, 0);
-			image(wpokefight, 0, 0);
-			image(fpokeme, 0, 0);
-			image(gpokeme, 0, 0);
-			image(wpokeme, 0, 0);
+			image(dimwhite, 0, 0);
 			image(fightbox, 0, 0);
-			image(fightmenu, 0, 0);
-			
-			
-			//Enemy
-			fill(0);
-			textSize(25);
-			if(logica.getPersona().getFight()==3) {
-				text("Enemy",74,75);
-			text(logica.getTorchi().getNombre(), 82, 122);
-			fill(0,255,0);
-			noStroke();
-			rect(80, 130, logica.getTorchi().getVida(), 20,20);
-			fill(0);
-			textSize(20);
-			text("lvl"+logica.getTorchi().getNivel(), 355, 143);
+
+			// Character Torchi
+			if (fpk == true) {
+				image(fpokeme, 0, 0);
+				fill(0);
+				textSize(25);
+				text("You", 1055, 389);
+				text("Your pokemon", 785, 435);
+				fill(0, 255, 0);
+				noStroke();
+				rect(781, 448, logica.getTorchi().getVida(), 20, 20);
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getTorchi().getNivel(), 1085, 468);
 			}
-			
-			
-			
-			
-			//Character
-			fill(0);
-			textSize(25);
-			text("You",1055,389);
-			text("Your pokemon", 785, 435);
-			fill(0,255,0);
-			noStroke();
-			rect(781, 448, logica.getTorchi().getVida(), 20,20);
-			fill(0);
-			textSize(20);
-			text("lvl"+logica.getTorchi().getNivel(), 1085, 468);
-			
-			
-			//Fight menu
-			image(fboton1,0,0);
-			image(fboton2,0,0);
-			image(fboton3,0,0);
-			textSize(30);
-			text("Fight",775,578);
-			text("Pokeball",950,578);
-			text("Run",775,630);
-			textSize(20);
-			text("What is your next move?",103,556,598,647);
 
-			break;
+			// Character Plant
+			if (gpk == true) {
+				image(gpokeme, 0, 0);
+				fill(0);
+				textSize(25);
+				text("You", 1055, 389);
+				text("Your pokemon", 785, 435);
+				fill(0, 255, 0);
+				noStroke();
+				rect(781, 448, logica.getPlant().getVida(), 20, 20);
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getPlant().getNivel(), 1085, 468);
+			}
 
+			// Character Water
+			if (wpk == true) {
+				image(wpokeme, 0, 0);
+				fill(0);
+				textSize(25);
+				text("You", 1055, 389);
+				text("Your pokemon", 785, 435);
+				fill(0, 255, 0);
+				noStroke();
+				rect(781, 448, logica.getWater().getVida(), 20, 20);
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getWater().getNivel(), 1085, 468);
+			}
+
+			// Enemy Torchi
+			if (logica.getPersona().getFight() == 3) {
+				fill(0);
+				textSize(25);
+				text("Enemy", 74, 75);
+				image(fpokefight, 0, 0);
+				text(logica.getTorchi().getNombre(), 82, 122);
+				fill(0, 255, 0);
+				noStroke();
+				rect(80, 130, logica.getTorchi().getVida(), 20, 20);
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getTorchi().getNivel(), 355, 143);
+			}
+
+			// Enemy Water
+			if (logica.getPersona().getFight() == 4) {
+				fill(0);
+				textSize(25);
+				text("Enemy", 74, 75);
+				image(wpokefight, 0, 0);
+				text(logica.getWater().getNombre(), 82, 122);
+				fill(0, 255, 0);
+				noStroke();
+				rect(80, 130, logica.getWater().getVida(), 20, 20);
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getWater().getNivel(), 355, 143);
+			}
+
+			// Enemy Plant
+			if (logica.getPersona().getFight() == 5) {
+				fill(0);
+				textSize(25);
+				text("Enemy", 74, 75);
+				image(gpokefight, 0, 0);
+				text(logica.getPlant().getNombre(), 82, 122);
+				fill(0, 255, 0);
+				noStroke();
+				rect(80, 130, logica.getPlant().getVida(), 20, 20);
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getPlant().getNivel(), 355, 143);
+			}
+
+			// Fight menu
+			image(fightmenu, 0, 0);
+			switch (btnfight) {
+			case 0:
+				textSize(30);
+				image(fboton1, 0, 0);
+				image(fboton2, 0, 0);
+				image(fboton3, 0, 0);
+				text("Fight", 775, 578);
+				text("Pokeball", 950, 578);
+				text("Run", 775, 630);
+
+				break;
+
+			case 1:
+				image(fboton1, 0, 0);
+				image(fboton2, 0, 0);
+				break;
+			}
+
+			textSize(20);
+			text("What is your next move?", 103, 556, 598, 647);
+
+			break;	
 		}// cierre switch
+		
+		
+		
+		String t=logica.getCrono().getTime();
+		fill(0);
+		text(t,1104,30);
 
 		fill(255);
 		text("X:" + mouseX + "Y:" + mouseY, mouseX, mouseY);
@@ -364,6 +458,30 @@ public class Main extends PApplet {
 			fpk = false;
 
 		}
+		if (pantalla == 3) {
+
+			if ((mouseX > 555 && mouseX < 693) && (mouseY > 526 && mouseY < 567)) {
+				exit();
+			}
+
+			if ((mouseX > 802 && mouseX < 928) && (mouseY > 528 && mouseY < 567)) {
+				pantalla = 4;
+			}
+
+		}
+
+		if (pantalla == 6) {
+			if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
+				btnfight = 1;
+			}
+			if ((mouseX > 945 && mouseX < 1080) && (mouseY > 553 && mouseY < 584)) {
+
+			}
+			if ((mouseX > 758 && mouseX < 876) && (mouseY > 608 && mouseY < 641)) {
+				pantalla = 5;
+			}
+
+		}
 
 	}
 
@@ -371,17 +489,17 @@ public class Main extends PApplet {
 		if (key == ENTER) {
 
 			if (pantalla == 1) {
+				logica.Starttimer();
+			}
 
+			if (pantalla == 4) {
 				logica.addUsuario(username.getText());
-
-			}
-
-			if (pantalla == 5) {
 				mapmusic.stop();
-				fightmusic.amp((float) 0.05);
-				fightmusic.play();
+				homemusic.amp((float) 0.05);
+				homemusic.play();
 
 			}
+
 			pantalla++;
 		}
 
@@ -491,28 +609,32 @@ public class Main extends PApplet {
 
 	public void hoverpokechoose() {
 
-		if ((mouseX > 565 && mouseX < 648) && (mouseY > 237 && mouseY < 307)) {
-			image(pokeselec, 0, 0);
-		}
-
-		if ((mouseX > 720 && mouseX < 813) && (mouseY > 239 && mouseY < 293)) {
-			image(pokeselec, 160, 0);
-		}
-
-		if ((mouseX > 878 && mouseX < 965) && (mouseY > 235 && mouseY < 300)) {
-			image(pokeselec, 310, 0);
-		}
-
+		/*
+		 * if ((mouseX > 565 && mouseX < 648) && (mouseY > 237 && mouseY < 307)) {
+		 * 
+		 * }
+		 * 
+		 * if ((mouseX > 720 && mouseX < 813) && (mouseY > 239 && mouseY < 293)) {
+		 * 
+		 * }
+		 * 
+		 * if ((mouseX > 878 && mouseX < 965) && (mouseY > 235 && mouseY < 300)) {
+		 * 
+		 * }
+		 */
 		if (fpk == true) {
 			image(fpoke, 0, 0);
+			image(pokeselec, 0, 0);
 		}
 
 		if (gpk == true) {
 			image(gpoke, 0, 0);
+			image(pokeselec, 160, 0);
 		}
 
 		if (wpk == true) {
 			image(wpoke, 0, 0);
+			image(pokeselec, 310, 0);
 		}
 
 	}// cierra key

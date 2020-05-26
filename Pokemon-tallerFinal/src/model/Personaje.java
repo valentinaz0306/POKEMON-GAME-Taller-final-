@@ -37,7 +37,7 @@ public class Personaje {
 				if (mapa[p.getI()][p.getJ()] != 0) {
 					moveup();
 					if(mapa[p.getI()][p.getJ()] >= 3) {
-						setFight(mapa[i][j]);
+						setFight(mapa[p.getI()][p.getJ()]);
 						System.out.println("lo que sea mani");
 					}
 					
@@ -56,7 +56,7 @@ public class Personaje {
 				if (mapa[p.getI()][p.getJ()] != 0) {
 					movedown();
 					if(mapa[p.getI()][p.getJ()] >= 3) {
-						setFight(mapa[i][j]);
+						setFight(mapa[p.getI()][p.getJ()]);
 						System.out.println("lo que sea mani");
 					}
 				} else {
@@ -73,7 +73,7 @@ public class Personaje {
 				if (mapa[p.getI()][p.getJ()] != 0) {
 					moveleft();
 					if(mapa[p.getI()][p.getJ()] >= 3) {
-						setFight(mapa[i][j]);
+						setFight(mapa[p.getI()][p.getJ()]);
 						System.out.println("lo que sea mani");
 					}
 				} else {
@@ -90,7 +90,7 @@ public class Personaje {
 				if (mapa[p.getI()][p.getJ()] != 0) {
 					moveright();
 					if(mapa[p.getI()][p.getJ()] >= 3) {
-						setFight(mapa[i][j]);
+						setFight(mapa[p.getI()][p.getJ()]);
 						System.out.println("lo que sea mani");
 					}
 				} else {

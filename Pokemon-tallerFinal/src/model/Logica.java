@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import processing.core.PApplet;
 import processing.core.PImage;
+import threads.ChronometerThread;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,6 +17,7 @@ import java.util.Set;
 public class Logica {
 	public final static int SIZE_MATRIX=100;
 	PApplet app;
+
 	private int pantalla=0;
 	public int fila = 7;
 	public int col = 12;
@@ -37,6 +39,7 @@ public class Logica {
 	private Pokemon torchi;
 	private Pokemon Plant;
 	private Pokemon Water;
+	private Chronometer crono;
 
 	// arralist para registar usuarios
 	private ArrayList<Jugador> users;
@@ -45,6 +48,7 @@ public class Logica {
 		this.app = app;
 		loadUsers();
 		generarPokemon();
+		crono = new Chronometer(); 
 		// System.out.println(mapa.length+ " "+ mapa[0].length);
 
 	}
@@ -53,6 +57,14 @@ public class Logica {
 	public void character() {
 		getPersona().move();
 		
+	}
+	
+	
+	public void Starttimer() {
+		 ChronometerThread cT=new ChronometerThread(crono);
+	        cT.setDaemon(true);
+	        cT.start();
+	        System.out.println("a contar");
 	}
 
 	
@@ -68,8 +80,11 @@ public class Logica {
 	};
 	
 	// Mothod to create the OBJECT Pokemon
-	public void loadTorchi() {
+	public void loadPokemon() {
 		setTorchi(new Pokemon(persona.getFight(),"Torchi", 5, 200, 0, false));
+		setPlant(new Pokemon(persona.getFight(),"Plant",5,200,0,false));
+		setWater(new Pokemon(persona.getFight(),"Water",5,200,0,false));
+		
 		
 	}
 
@@ -215,7 +230,32 @@ public class Logica {
 	public void setPantalla(int pantalla) {
 		this.pantalla = pantalla;
 	}
-	
+
+	public Pokemon getPlant() {
+		return Plant;
+	}
+
+	public void setPlant(Pokemon plant) {
+		Plant = plant;
+	}
+
+	public Pokemon getWater() {
+		return Water;
+	}
+
+	public void setWater(Pokemon water) {
+		Water = water;
+	}
+
+	public Chronometer getCrono() {
+		return crono;
+	}
+
+	public void setCrono(Chronometer crono) {
+		this.crono = crono;
+	}
+
+
 	
 	
 	
