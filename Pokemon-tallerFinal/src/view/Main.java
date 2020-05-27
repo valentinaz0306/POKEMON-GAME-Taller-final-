@@ -7,6 +7,7 @@ import processing.core.PFont;
 import controlP5.*;
 import exceptions.LifeException;
 import exceptions.NameException;
+import exceptions.PokemonException;
 import model.Jugador;
 import model.Logica;
 import model.Pokemon;
@@ -71,12 +72,27 @@ public class Main extends PApplet {
 	PImage doc;
 	PImage enemy;
 	PImage intro;
+	PImage arrowbtn;
+	PImage arrowbtnUP;
+	PImage arrowbtnDOWN;
+	PImage arrowbtnLEFT;
+	PImage arrowbtnRIGHT;
+	PImage continuebtn;
+	PImage time;
+	PImage pokedexbtn;
+	PImage userscreen;
+	PImage pkdexscreen;
+	PImage exit;
+	PImage userbtn;
 
-	int chnum = 4; // number of images
-	PImage[] chdown = new PImage[chnum]; // ? just copied someone else's on a forum don't really get this line
+	int chnum = 4;
+	PImage[] chdown = new PImage[chnum];
 	PImage[] chup = new PImage[chnum];
 	PImage[] chur = new PImage[chnum];
 	PImage[] chul = new PImage[chnum];
+
+	int cap = 3;
+	PImage[] catchpk = new PImage[cap];
 
 	// Int variables
 
@@ -162,6 +178,18 @@ public class Main extends PApplet {
 		enemy = loadImage("image/enemy.png");
 		doc = loadImage("image/doc.png");
 		intro = loadImage("image/intro.png");
+		arrowbtn = loadImage("image/arrowbtn.png");
+		arrowbtnUP = loadImage("image/arrowbtnUP.png");
+		arrowbtnDOWN = loadImage("image/arrowbtnDown.png");
+		arrowbtnLEFT = loadImage("image/arrowbtnLeft.png");
+		arrowbtnRIGHT = loadImage("image/arrowbtnRight.png");
+		continuebtn = loadImage("image/continuebtn.png");
+		time = loadImage("image/time.png");
+		pokedexbtn = loadImage("image/pokedexbtn.png");
+		userscreen = loadImage("image/Userscreen.png");
+		pkdexscreen = loadImage("image/pkdexscreen.png");
+		exit = loadImage("image/exit.png");
+		userbtn = loadImage("image/userbtn.png");
 
 		for (int i = 0; i < 3; i++) {
 			chdown[i] = loadImage("image/sprite/chdown" + i + ".png");
@@ -174,6 +202,10 @@ public class Main extends PApplet {
 		}
 		for (int i = 0; i < 3; i++) {
 			chul[i] = loadImage("image/sprite/chleft" + i + ".png");
+		}
+
+		for (int i = 0; i < 2; i++) {
+			catchpk[i] = loadImage("image/catch" + i + ".png");
 		}
 
 		// Load int variables
@@ -266,7 +298,7 @@ public class Main extends PApplet {
 			text(s, 553, 162, 430, 200);
 			text("NO", 592, 555);
 			text("YES", 833, 555);
-
+			image(time, 0, 0);
 			break;
 
 		case 4:
@@ -282,10 +314,10 @@ public class Main extends PApplet {
 			image(box, 0, 0);
 			hoverpokechoose();
 			image(pokeballs, 0, 0);
-			text("Doc", 870, 530);
 			String m = "Choose your Pokemon, your little buddy will help you in this adventure";
 			text(m, 151, 595);
-
+			image(continuebtn, 0, 0);
+			image(time, 0, 0);
 			break;
 
 		case 5:
@@ -295,7 +327,12 @@ public class Main extends PApplet {
 			if (logica.getPersona().getFight() >= 3) {
 				// System.out.println("cambioooooooo scren");
 				logica.guardarPokemon(logica.getPersona().getFight());
+				vidaT = logica.getTorchi().getVida();
+				vidaP = logica.getPlant().getVida();
+				vidaW = logica.getWater().getVida();
+				btnfight = 0;
 				pantalla = 6;
+				
 
 			}
 			paintcharacter();
@@ -304,7 +341,10 @@ public class Main extends PApplet {
 			username.hide();
 			// fightmusic.stop();
 			;
-
+			image(pokedexbtn, 0, 0);
+			image(userbtn,55,0);
+			image(time, 0, 0);
+			image(exit,0,0);
 			break;
 
 		case 6:
@@ -312,7 +352,7 @@ public class Main extends PApplet {
 			 * if (!firsttime) { homemusic.stop(); fightmusic.amp((float) 0.05);
 			 * fightmusic.play(); fightmusic.loop(); firsttime = true; }
 			 */
-
+			
 			image(map, 0, 0);
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
@@ -453,29 +493,194 @@ public class Main extends PApplet {
 
 			textSize(20);
 			text("What is your next move?", 103, 556, 598, 647);
-
+			image(time, 0, 0);
 			break;
 
 		// pantalla de ordenar nombre usuario
 		case 7:
 
 			background(0);
+			image(userscreen,0,0);
 			fill(255);
 			textSize(25);
 			text("para ordenar por nombre presionar la letra n", 100, 100);
 			text(reporte, 100, 150);
-
+			image(time, 0, 0);
 			break;
 
 		// pantalla de ordenar pokemones pokedex
 		case 8:
 
 			background(0);
+			image(pkdexscreen,0,0);
 			fill(255);
 			textSize(25);
 			text(reportePoke, 100, 150);
-
+			image(time, 0, 0);
 			break;
+
+		case 9:
+			background(0);
+			image(bg1, 0, 0);
+			image(dim, 0, 0);
+			image(enemy,0,0);
+			text("Your eternal rival has challenge you to a PokeBattle, beat her to win",626,206,300,230);
+			image(continuebtn, 0, 80);
+			
+			break;
+			
+		case 10:
+			/*
+			 * if (!firsttime) { homemusic.stop(); fightmusic.amp((float) 0.05);
+			 * fightmusic.play(); fightmusic.loop(); firsttime = true; }
+			 */
+
+			image(map, 0, 0);
+			image(mapshadows, 0, 0);
+			image(mapobject, 0, 0);
+			image(dimwhite, 0, 0);
+			image(fightbox, 0, 0);
+
+			// Character Torchi
+			if (fpk == true) {
+				image(fpokeme, 0, 0);
+				fill(0);
+				textSize(25);
+				text("You", 1055, 389);
+				text("Your pokemon", 785, 435);
+				fill(0, 255, 0);
+				noStroke();
+				rect(781, 448, 200, 20, 20);
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getTorchi().getNivel(), 1085, 468);
+			}
+
+			// Character Plant
+			if (gpk == true) {
+				image(gpokeme, 0, 0);
+				fill(0);
+				textSize(25);
+				text("You", 1055, 389);
+				text("Your pokemon", 785, 435);
+				fill(0, 255, 0);
+				noStroke();
+				rect(781, 448, 200, 20, 20);
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getPlant().getNivel(), 1085, 468);
+			}
+
+			// Character Water
+			if (wpk == true) {
+				image(wpokeme, 0, 0);
+				fill(0);
+				textSize(25);
+				text("You", 1055, 389);
+				text("Your pokemon", 785, 435);
+				fill(0, 255, 0);
+				noStroke();
+				rect(781, 448, 200, 20, 20);
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getWater().getNivel(), 1085, 468);
+			}
+
+			// Enemy Torchi
+			if (wpk==true) {
+				fill(0);
+				textSize(25);
+				text("Enemy", 74, 75);
+				image(fpokefight, 0, 0);
+				text(logica.getTorchi().getNombre(), 82, 122);
+				if (vidaT > 50) {
+					fill(0, 255, 0);
+					noStroke();
+					rect(80, 130, vidaT, 20, 20);
+				} else {
+					fill(255, 0, 0);
+					noStroke();
+					rect(80, 130, vidaT, 20, 20);
+				}
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getTorchi().getNivel(), 355, 143);
+			}
+
+			// Enemy Water
+			if (gpk==true) {
+				fill(0);
+				textSize(25);
+				text("Enemy", 74, 75);
+				image(wpokefight, 0, 0);
+				text(logica.getWater().getNombre(), 82, 122);
+				if (vidaW > 50) {
+					fill(0, 255, 0);
+					noStroke();
+					rect(80, 130, vidaW, 20, 20);
+				} else {
+					fill(255, 0, 0);
+					noStroke();
+					rect(80, 130, vidaW, 20, 20);
+				}
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getWater().getNivel(), 355, 143);
+			}
+
+			// Enemy Plant
+			if (fpk==true) {
+				fill(0);
+				textSize(25);
+				text("Enemy", 74, 75);
+				image(gpokefight, 0, 0);
+				text(logica.getPlant().getNombre(), 82, 122);
+				if (vidaP > 50) {
+					fill(0, 255, 0);
+					noStroke();
+					rect(80, 130, vidaP, 20, 20);
+				} else {
+					fill(255, 0, 0);
+					noStroke();
+					rect(80, 130, vidaP, 20, 20);
+				}
+				fill(0);
+				textSize(20);
+				text("lvl" + logica.getPlant().getNivel(), 355, 143);
+			}
+
+			// Fight menu
+			image(fightmenu, 0, 0);
+			switch (btnfight) {
+			case 0:
+				textSize(30);
+				image(fboton2, 0, 0);
+			
+				image(fboton3, 0, 0);
+				text("Fight", 775, 578);
+			
+				text("Run", 775, 630);
+
+				break;
+
+			case 1:
+				image(fboton1, 0, 0);
+				image(fboton2, 0, 0);
+				text("Punch", 775, 578);
+				text("Super-Kick", 950, 578);
+				image(fboton3, 0, 0);
+				text("back", 775, 630);
+				break;
+			}
+
+			textSize(20);
+			text("What is your next move?", 103, 556, 598, 647);
+			image(time, 0, 0);
+			break;
+			
+			
+			
+			
 
 		}// cierre switch
 
@@ -489,25 +694,7 @@ public class Main extends PApplet {
 	}
 
 	public void mousePressed() {
-		if ((mouseX > 565 && mouseX < 648) && (mouseY > 237 && mouseY < 307)) {
-			fpk = !fpk;
-			gpk = false;
-			wpk = false;
-		}
-
-		if ((mouseX > 720 && mouseX < 813) && (mouseY > 239 && mouseY < 293)) {
-			gpk = !gpk;
-			fpk = false;
-			wpk = false;
-
-		}
-
-		if ((mouseX > 878 && mouseX < 965) && (mouseY > 235 && mouseY < 300)) {
-			wpk = !wpk;
-			gpk = false;
-			fpk = false;
-
-		}
+		
 		if (pantalla == 3) {
 
 			if ((mouseX > 555 && mouseX < 693) && (mouseY > 526 && mouseY < 567)) {
@@ -515,12 +702,78 @@ public class Main extends PApplet {
 			}
 
 			if ((mouseX > 802 && mouseX < 928) && (mouseY > 528 && mouseY < 567)) {
-				pantalla = 4;
+				pantalla=4;
 			}
 
 		}
+		
+		
+		if (pantalla == 4) {
+			
+			if ((mouseX > 565 && mouseX < 648) && (mouseY > 237 && mouseY < 307)) {
+				fpk = !fpk;
+				gpk = false;
+				wpk = false;
+			}
 
-		if (pantalla == 6) {
+			if ((mouseX > 720 && mouseX < 813) && (mouseY > 239 && mouseY < 293)) {
+				gpk = !gpk;
+				fpk = false;
+				wpk = false;
+
+			}
+
+			if ((mouseX > 878 && mouseX < 965) && (mouseY > 235 && mouseY < 300)) {
+				wpk = !wpk;
+				gpk = false;
+				fpk = false;
+
+			}
+			
+	
+			
+			if ((mouseX > 864 && mouseX < 1024) && (mouseY > 430 && mouseY < 470)) {
+			if(fpk == true | wpk == true | gpk == true) {
+					pantalla=9;
+				
+			} else {
+				try {
+					throw new PokemonException();
+				} catch (PokemonException e) {
+
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+			}
+
+		}
+		}
+		
+		
+		if(pantalla==5) {
+			if ((mouseX > 19 && mouseX <113) && (mouseY > 25 && mouseY < 59)) {
+				exit();
+				
+			}
+			
+			if ((mouseX > 1026 && mouseX <1100) && (mouseY > 197 && mouseY < 245)) {
+				reporte = logica.reporteUsuarios();
+				pantalla=7;
+				
+			}
+			
+			
+			
+			
+			
+		if ((mouseX > 1020 && mouseX < 1130) && (mouseY > 76 && mouseY < 126)) {
+			logica.ordenarPokemon();
+			reportePoke = logica.obtenerReport();
+			pantalla = 8;
+		}
+		}
+		
+
+		if (pantalla == 6){
 
 			if (btnfight == 0) {
 				if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
@@ -588,20 +841,98 @@ public class Main extends PApplet {
 			}
 
 		}
-		
-		//aqui va la excepcion
-		/*if () {
-			
-			try {
-				throw new PokemonException();
-			} catch (PokemonException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
-				JOptionPane.showMessageDialog(null, e.getMessage());
-			}*/	
-			
+
+		if(pantalla==7 | pantalla==8) {
+			if ((mouseX > 973 && mouseX < 1100) && (mouseY > 575 && mouseY < 625)) {
+				pantalla=5;
+			}
+				
+			}
+		if(pantalla==9) {
+			if ((mouseX > 864 && mouseX < 1024) && (mouseY > 510 && mouseY < 550)) {
+					pantalla=10;
+				
+			}
 		}
-	
+		
+		
+		if (pantalla == 10){
+			
+			
+			
+
+			if (btnfight == 0) {
+				if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
+					btnfight = 1;
+				}
+				
+
+				if ((mouseX > 758 && mouseX < 876) && (mouseY > 608 && mouseY < 641)) {
+					logica.loadPersonaje();
+					vidaT = logica.getTorchi().getVida();
+					vidaP = logica.getPlant().getVida();
+					vidaW = logica.getWater().getVida();
+					btnfight = 0;
+					pantalla = 5;
+				}
+
+			}
+			
+			
+
+			if (btnfight == 1) {
+				if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
+
+					if (vidaT >= 20) {
+						vidaT -= 10;
+					}else {
+						pantalla=5;
+					}
+
+					if (vidaW >= 20) {
+						vidaW -= 10;
+					}else {
+						pantalla=5;
+					}
+					if (vidaP >= 20) {
+						vidaP -= 10;
+					}else {
+						pantalla=5;
+					}
+					
+					
+				}
+
+				if ((mouseX > 758 && mouseX < 876) && (mouseY > 608 && mouseY < 641)) {
+					btnfight = 0;
+				}
+				if ((mouseX > 945 && mouseX < 1080) && (mouseY > 553 && mouseY < 584)) {
+					if (vidaT >= 20) {
+						vidaT -= 50;
+					}else {
+						pantalla=5;
+					}
+
+					if (vidaW >= 20) {
+						vidaW -= 50;
+					}else {
+						pantalla=5;
+					}
+
+					if (vidaP >= 20) {
+						vidaP -= 50;
+					}else {
+						pantalla=5;
+					}
+				}
+
+			}
+
+		}
+
+		
+
+	}
 
 	public void keyPressed() {
 		if (key == ENTER) {
@@ -668,20 +999,8 @@ public class Main extends PApplet {
 
 		}
 
-		if (key == 'h') {
 
-			pantalla = 7;
-			reporte = logica.reporteUsuarios();
-
-		}
-
-		if (key == 'o') {
-
-			logica.ordenarPokemon();
-			reportePoke = logica.obtenerReport();
-			pantalla = 8;
-
-		}
+	
 
 		// movimiento del personaje
 
@@ -760,19 +1079,6 @@ public class Main extends PApplet {
 
 	public void hoverpokechoose() {
 
-		/*
-		 * if ((mouseX > 565 && mouseX < 648) && (mouseY > 237 && mouseY < 307)) {
-		 * 
-		 * }
-		 * 
-		 * if ((mouseX > 720 && mouseX < 813) && (mouseY > 239 && mouseY < 293)) {
-		 * 
-		 * }
-		 * 
-		 * if ((mouseX > 878 && mouseX < 965) && (mouseY > 235 && mouseY < 300)) {
-		 * 
-		 * }
-		 */
 		if (fpk == true) {
 			image(fpoke, 0, 0);
 			image(pokeselec, 0, 0);
@@ -812,19 +1118,26 @@ public class Main extends PApplet {
 		PImage img3 = chul[pv];
 		if (still == true) {
 			image(ch, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+
+			image(arrowbtn, 0, 0);
+
 		}
 
 		if (up == true) {
 			image(img1, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+			image(arrowbtnUP, 0, 0);
 		}
 		if (down == true) {
 			image(img, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+			image(arrowbtnDOWN, 0, 0);
 		}
 		if (right == true) {
 			image(img2, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+			image(arrowbtnRIGHT, 0, 0);
 		}
 		if (left == true) {
 			image(img3, logica.getPersona().PosX, logica.getPersona().PosY, 70, 70);
+			image(arrowbtnLEFT, 0, 0);
 		}
 		if (frameCount % 17 == 0) {
 			pv++;
