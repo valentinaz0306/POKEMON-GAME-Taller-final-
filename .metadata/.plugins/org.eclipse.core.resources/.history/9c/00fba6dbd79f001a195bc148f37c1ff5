@@ -789,10 +789,6 @@ public class Main extends PApplet {
 					vidaW = logica.getWater().getVida();
 					btnfight = 0;
 					pantalla = 5;
-					
-					fightmusic.stop();
-					homemusic.amp((float) 0.05);
-					homemusic.play();
 				}
 
 			}
@@ -858,6 +854,7 @@ public class Main extends PApplet {
 				fightmusic.amp((float) 0.05);
 				fightmusic.play();
 				fightmusic.loop();
+				firsttime = true;
 
 			}
 		}
@@ -876,10 +873,6 @@ public class Main extends PApplet {
 					vidaW = logica.getWater().getVida();
 					btnfight = 0;
 					pantalla = 5;
-					
-					fightmusic.stop();
-					homemusic.amp((float) 0.05);
-					homemusic.play();
 
 				}
 

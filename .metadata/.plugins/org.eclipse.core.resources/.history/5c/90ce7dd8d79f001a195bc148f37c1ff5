@@ -535,6 +535,14 @@ public class Main extends PApplet {
 
 		case 10:
 
+			if (!firsttime) {
+				homemusic.stop();
+				fightmusic.amp((float) 0.05);
+				fightmusic.play();
+				fightmusic.loop();
+				firsttime = true;
+			}
+
 			image(map, 0, 0);
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
@@ -789,10 +797,6 @@ public class Main extends PApplet {
 					vidaW = logica.getWater().getVida();
 					btnfight = 0;
 					pantalla = 5;
-					
-					fightmusic.stop();
-					homemusic.amp((float) 0.05);
-					homemusic.play();
 				}
 
 			}
@@ -853,11 +857,6 @@ public class Main extends PApplet {
 		if (pantalla == 9) {
 			if ((mouseX > 864 && mouseX < 1024) && (mouseY > 510 && mouseY < 550)) {
 				pantalla = 10;
-				
-				mapmusic.stop();
-				fightmusic.amp((float) 0.05);
-				fightmusic.play();
-				fightmusic.loop();
 
 			}
 		}
@@ -876,10 +875,6 @@ public class Main extends PApplet {
 					vidaW = logica.getWater().getVida();
 					btnfight = 0;
 					pantalla = 5;
-					
-					fightmusic.stop();
-					homemusic.amp((float) 0.05);
-					homemusic.play();
 
 				}
 

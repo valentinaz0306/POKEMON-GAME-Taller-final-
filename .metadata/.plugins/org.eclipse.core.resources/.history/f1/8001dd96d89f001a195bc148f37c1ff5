@@ -789,10 +789,6 @@ public class Main extends PApplet {
 					vidaW = logica.getWater().getVida();
 					btnfight = 0;
 					pantalla = 5;
-					
-					fightmusic.stop();
-					homemusic.amp((float) 0.05);
-					homemusic.play();
 				}
 
 			}

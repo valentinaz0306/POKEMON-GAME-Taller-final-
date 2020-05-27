@@ -33,9 +33,9 @@ public class Main extends PApplet {
 	Textfield usernameR, emailR, passwordR, cPasswordR;
 
 	// Sound variables
-	SoundFile mapmusic;
-	SoundFile fightmusic;
-	SoundFile homemusic;
+	// SoundFile mapmusic;
+	// SoundFile fightmusic;
+	// SoundFile homemusic;
 
 	// Image variables
 	PImage start;
@@ -136,13 +136,12 @@ public class Main extends PApplet {
 		mensaje = false;
 
 		// Load sound
-
-		mapmusic = new SoundFile(this, "music/map.mp3");
-		fightmusic = new SoundFile(this, "music/fight.mp3");
-		homemusic = new SoundFile(this, "music/home.mp3");
-		mapmusic.amp((float) 0.1);
-		mapmusic.play();
-		mapmusic.loop();
+		/*
+		 * mapmusic = new SoundFile(this, "music/map.mp3"); fightmusic = new
+		 * SoundFile(this, "music/fight.mp3"); homemusic = new SoundFile(this,
+		 * "music/home.mp3"); mapmusic.amp((float) 0.1); mapmusic.play();
+		 * mapmusic.loop();
+		 */
 
 		// Load images
 		start = loadImage("image/start.png");
@@ -333,30 +332,27 @@ public class Main extends PApplet {
 				vidaW = logica.getWater().getVida();
 				btnfight = 0;
 				pantalla = 6;
+				
 
 			}
 			paintcharacter();
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
 			username.hide();
-			fightmusic.stop();
+			// fightmusic.stop();
 			;
 			image(pokedexbtn, 0, 0);
-			image(userbtn, 55, 0);
+			image(userbtn,55,0);
 			image(time, 0, 0);
-			image(exit, 0, 0);
+			image(exit,0,0);
 			break;
 
 		case 6:
-
-			if (!firsttime) {
-				homemusic.stop();
-				fightmusic.amp((float) 0.05);
-				fightmusic.play();
-				fightmusic.loop();
-				firsttime = true;
-			}
-
+			/*
+			 * if (!firsttime) { homemusic.stop(); fightmusic.amp((float) 0.05);
+			 * fightmusic.play(); fightmusic.loop(); firsttime = true; }
+			 */
+			
 			image(map, 0, 0);
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
@@ -504,11 +500,11 @@ public class Main extends PApplet {
 		case 7:
 
 			background(0);
-			image(userscreen, 0, 0);
+			image(userscreen,0,0);
 			fill(255);
 			textSize(25);
-			text("Para ordenar por nombre presionar la letra n, por fecha \n presionar la letra f ", 100, 100);
-			text(reporte, 100, 200);
+			text("para ordenar por nombre presionar la letra n", 100, 100);
+			text(reporte, 100, 150);
 			image(time, 0, 0);
 			break;
 
@@ -516,7 +512,7 @@ public class Main extends PApplet {
 		case 8:
 
 			background(0);
-			image(pkdexscreen, 0, 0);
+			image(pkdexscreen,0,0);
 			fill(255);
 			textSize(25);
 			text(reportePoke, 100, 150);
@@ -527,13 +523,17 @@ public class Main extends PApplet {
 			background(0);
 			image(bg1, 0, 0);
 			image(dim, 0, 0);
-			image(enemy, 0, 0);
-			text("Your eternal rival has challenge you to a PokeBattle, beat her to win", 626, 206, 300, 230);
+			image(enemy,0,0);
+			text("Your eternal rival has challenge you to a PokeBattle, beat her to win",626,206,300,230);
 			image(continuebtn, 0, 80);
-
+			
 			break;
-
+			
 		case 10:
+			/*
+			 * if (!firsttime) { homemusic.stop(); fightmusic.amp((float) 0.05);
+			 * fightmusic.play(); fightmusic.loop(); firsttime = true; }
+			 */
 
 			image(map, 0, 0);
 			image(mapshadows, 0, 0);
@@ -587,7 +587,7 @@ public class Main extends PApplet {
 			}
 
 			// Enemy Torchi
-			if (wpk == true) {
+			if (wpk==true) {
 				fill(0);
 				textSize(25);
 				text("Enemy", 74, 75);
@@ -608,7 +608,7 @@ public class Main extends PApplet {
 			}
 
 			// Enemy Water
-			if (gpk == true) {
+			if (gpk==true) {
 				fill(0);
 				textSize(25);
 				text("Enemy", 74, 75);
@@ -629,7 +629,7 @@ public class Main extends PApplet {
 			}
 
 			// Enemy Plant
-			if (fpk == true) {
+			if (fpk==true) {
 				fill(0);
 				textSize(25);
 				text("Enemy", 74, 75);
@@ -655,10 +655,10 @@ public class Main extends PApplet {
 			case 0:
 				textSize(30);
 				image(fboton2, 0, 0);
-
+			
 				image(fboton3, 0, 0);
 				text("Fight", 775, 578);
-
+			
 				text("Run", 775, 630);
 
 				break;
@@ -677,6 +677,10 @@ public class Main extends PApplet {
 			text("What is your next move?", 103, 556, 598, 647);
 			image(time, 0, 0);
 			break;
+			
+			
+			
+			
 
 		}// cierre switch
 
@@ -685,12 +689,12 @@ public class Main extends PApplet {
 		text(t, 1104, 30);
 
 		fill(255);
-		// text("X:" + mouseX + "Y:" + mouseY, mouseX, mouseY);
+		text("X:" + mouseX + "Y:" + mouseY, mouseX, mouseY);
 
 	}
 
 	public void mousePressed() {
-
+		
 		if (pantalla == 3) {
 
 			if ((mouseX > 555 && mouseX < 693) && (mouseY > 526 && mouseY < 567)) {
@@ -698,13 +702,14 @@ public class Main extends PApplet {
 			}
 
 			if ((mouseX > 802 && mouseX < 928) && (mouseY > 528 && mouseY < 567)) {
-				pantalla = 4;
+				pantalla=4;
 			}
 
 		}
-
+		
+		
 		if (pantalla == 4) {
-
+			
 			if ((mouseX > 565 && mouseX < 648) && (mouseY > 237 && mouseY < 307)) {
 				fpk = !fpk;
 				gpk = false;
@@ -724,43 +729,51 @@ public class Main extends PApplet {
 				fpk = false;
 
 			}
-
+			
+	
+			
 			if ((mouseX > 864 && mouseX < 1024) && (mouseY > 430 && mouseY < 470)) {
-				if (fpk == true | wpk == true | gpk == true) {
-					pantalla = 9;
+			if(fpk == true | wpk == true | gpk == true) {
+					pantalla=9;
+				
+			} else {
+				try {
+					throw new PokemonException();
+				} catch (PokemonException e) {
 
-				} else {
-					try {
-						throw new PokemonException();
-					} catch (PokemonException e) {
-
-						JOptionPane.showMessageDialog(null, e.getMessage());
-					}
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
-
 			}
-		}
 
-		if (pantalla == 5) {
-			if ((mouseX > 19 && mouseX < 113) && (mouseY > 25 && mouseY < 59)) {
+		}
+		}
+		
+		
+		if(pantalla==5) {
+			if ((mouseX > 19 && mouseX <113) && (mouseY > 25 && mouseY < 59)) {
 				exit();
-
+				
 			}
-
-			if ((mouseX > 1026 && mouseX < 1100) && (mouseY > 197 && mouseY < 245)) {
+			
+			if ((mouseX > 1026 && mouseX <1100) && (mouseY > 197 && mouseY < 245)) {
 				reporte = logica.reporteUsuarios();
-				pantalla = 7;
-
+				pantalla=7;
+				
 			}
-
-			if ((mouseX > 1020 && mouseX < 1130) && (mouseY > 76 && mouseY < 126)) {
-				logica.ordenarPokemon();
-				reportePoke = logica.obtenerReport();
-				pantalla = 8;
-			}
+			
+			
+			
+			
+			
+		if ((mouseX > 1020 && mouseX < 1130) && (mouseY > 76 && mouseY < 126)) {
+			logica.ordenarPokemon();
+			reportePoke = logica.obtenerReport();
+			pantalla = 8;
 		}
+		}
+		
 
-		if (pantalla == 6) {
+		if (pantalla == 6){
 
 			if (btnfight == 0) {
 				if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
@@ -789,10 +802,6 @@ public class Main extends PApplet {
 					vidaW = logica.getWater().getVida();
 					btnfight = 0;
 					pantalla = 5;
-					
-					fightmusic.stop();
-					homemusic.amp((float) 0.05);
-					homemusic.play();
 				}
 
 			}
@@ -833,41 +842,30 @@ public class Main extends PApplet {
 
 		}
 
-		// llamar metodos de ordenamiento de usuario
-
-		if (pantalla == 7) {
-
+		if(pantalla==7 | pantalla==8) {
 			if ((mouseX > 973 && mouseX < 1100) && (mouseY > 575 && mouseY < 625)) {
-				pantalla = 5;
+				pantalla=5;
 			}
-
-		}
-
-		if (pantalla == 8) {
-			if ((mouseX > 973 && mouseX < 1100) && (mouseY > 575 && mouseY < 625)) {
-				pantalla = 5;
-			}
-
-		}
-
-		if (pantalla == 9) {
-			if ((mouseX > 864 && mouseX < 1024) && (mouseY > 510 && mouseY < 550)) {
-				pantalla = 10;
 				
-				mapmusic.stop();
-				fightmusic.amp((float) 0.05);
-				fightmusic.play();
-				fightmusic.loop();
-
+			}
+		if(pantalla==9) {
+			if ((mouseX > 864 && mouseX < 1024) && (mouseY > 510 && mouseY < 550)) {
+					pantalla=10;
+				
 			}
 		}
-
-		if (pantalla == 10) {
+		
+		
+		if (pantalla == 10){
+			
+			
+			
 
 			if (btnfight == 0) {
 				if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
 					btnfight = 1;
 				}
+				
 
 				if ((mouseX > 758 && mouseX < 876) && (mouseY > 608 && mouseY < 641)) {
 					logica.loadPersonaje();
@@ -876,50 +874,33 @@ public class Main extends PApplet {
 					vidaW = logica.getWater().getVida();
 					btnfight = 0;
 					pantalla = 5;
-					
-					fightmusic.stop();
-					homemusic.amp((float) 0.05);
-					homemusic.play();
-
 				}
 
 			}
+			
+			
 
 			if (btnfight == 1) {
 				if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
 
 					if (vidaT >= 20) {
 						vidaT -= 10;
-					} else {
-						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
+					}else {
+						pantalla=5;
 					}
 
 					if (vidaW >= 20) {
 						vidaW -= 10;
-					} else {
-						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
+					}else {
+						pantalla=5;
 					}
 					if (vidaP >= 20) {
 						vidaP -= 10;
-					} else {
-						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
+					}else {
+						pantalla=5;
 					}
-
+					
+					
 				}
 
 				if ((mouseX > 758 && mouseX < 876) && (mouseY > 608 && mouseY < 641)) {
@@ -928,41 +909,28 @@ public class Main extends PApplet {
 				if ((mouseX > 945 && mouseX < 1080) && (mouseY > 553 && mouseY < 584)) {
 					if (vidaT >= 20) {
 						vidaT -= 50;
-					} else {
-						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
+					}else {
+						pantalla=5;
 					}
 
 					if (vidaW >= 20) {
 						vidaW -= 50;
-					} else {
-						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
+					}else {
+						pantalla=5;
 					}
 
 					if (vidaP >= 20) {
 						vidaP -= 50;
-					} else {
-						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
+					}else {
+						pantalla=5;
 					}
 				}
 
 			}
 
 		}
+
+		
 
 	}
 
@@ -990,29 +958,33 @@ public class Main extends PApplet {
 			} else {
 				pantalla++;
 			}
+			/*
+			 * if (pantalla == 4) { mapmusic.stop(); homemusic.amp((float) 0.05);
+			 * homemusic.play();
+			 * 
+			 * }
+			 */
 
 		}
-		// guarda el reporte de usuarios en un txt
+
 		if (key == 'i') {
 
 			saveStrings("data/reporte.txt", logica.guardarTxt());
 		}
-		// con k aparecen los usuarios que se han registrado
+		// con s aparecen los usuarios que se han registrado
 		if (key == 'k') {
 
 			logica.probar();
 		}
-		// con f se ordena por fecha
+		// con d se ordena por fecha
 		if (key == 'f') {
 
 			logica.ordenarFecha();
-			reporte = logica.reporteUsuarios();
 		}
-		// con n se ordena por nombre
+		// con f se ordena por nombre
 		if (key == 'n') {
 
 			logica.ordenarNombre();
-			reporte = logica.reporteUsuarios();
 		}
 		// cada vez que se quiera guardar de forma serializada el usuario debe undir g
 		if (key == 'g') {
@@ -1026,6 +998,9 @@ public class Main extends PApplet {
 			logica.generarPokemon();
 
 		}
+
+
+	
 
 		// movimiento del personaje
 

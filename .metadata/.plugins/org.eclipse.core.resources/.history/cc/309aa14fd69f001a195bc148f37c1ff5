@@ -32,10 +32,10 @@ public class Main extends PApplet {
 	Textfield username, password;
 	Textfield usernameR, emailR, passwordR, cPasswordR;
 
-	// Sound variables
-	SoundFile mapmusic;
-	SoundFile fightmusic;
-	SoundFile homemusic;
+	 //Sound variables
+	 SoundFile mapmusic;
+	 SoundFile fightmusic;
+	 SoundFile homemusic;
 
 	// Image variables
 	PImage start;
@@ -339,7 +339,7 @@ public class Main extends PApplet {
 			image(mapshadows, 0, 0);
 			image(mapobject, 0, 0);
 			username.hide();
-			fightmusic.stop();
+			// fightmusic.stop();
 			;
 			image(pokedexbtn, 0, 0);
 			image(userbtn, 55, 0);
@@ -534,6 +534,10 @@ public class Main extends PApplet {
 			break;
 
 		case 10:
+			/*
+			 * if (!firsttime) { homemusic.stop(); fightmusic.amp((float) 0.05);
+			 * fightmusic.play(); fightmusic.loop(); firsttime = true; }
+			 */
 
 			image(map, 0, 0);
 			image(mapshadows, 0, 0);
@@ -789,10 +793,6 @@ public class Main extends PApplet {
 					vidaW = logica.getWater().getVida();
 					btnfight = 0;
 					pantalla = 5;
-					
-					fightmusic.stop();
-					homemusic.amp((float) 0.05);
-					homemusic.play();
 				}
 
 			}
@@ -853,11 +853,6 @@ public class Main extends PApplet {
 		if (pantalla == 9) {
 			if ((mouseX > 864 && mouseX < 1024) && (mouseY > 510 && mouseY < 550)) {
 				pantalla = 10;
-				
-				mapmusic.stop();
-				fightmusic.amp((float) 0.05);
-				fightmusic.play();
-				fightmusic.loop();
 
 			}
 		}
@@ -876,11 +871,6 @@ public class Main extends PApplet {
 					vidaW = logica.getWater().getVida();
 					btnfight = 0;
 					pantalla = 5;
-					
-					fightmusic.stop();
-					homemusic.amp((float) 0.05);
-					homemusic.play();
-
 				}
 
 			}
@@ -892,32 +882,17 @@ public class Main extends PApplet {
 						vidaT -= 10;
 					} else {
 						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
 					}
 
 					if (vidaW >= 20) {
 						vidaW -= 10;
 					} else {
 						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
 					}
 					if (vidaP >= 20) {
 						vidaP -= 10;
 					} else {
 						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
 					}
 
 				}
@@ -930,33 +905,18 @@ public class Main extends PApplet {
 						vidaT -= 50;
 					} else {
 						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
 					}
 
 					if (vidaW >= 20) {
 						vidaW -= 50;
 					} else {
 						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
 					}
 
 					if (vidaP >= 20) {
 						vidaP -= 50;
 					} else {
 						pantalla = 5;
-
-						fightmusic.stop();
-						homemusic.amp((float) 0.05);
-						homemusic.play();
-
 					}
 				}
 
@@ -990,6 +950,12 @@ public class Main extends PApplet {
 			} else {
 				pantalla++;
 			}
+			/*
+			 * if (pantalla == 4) { mapmusic.stop(); homemusic.amp((float) 0.05);
+			 * homemusic.play();
+			 * 
+			 * }
+			 */
 
 		}
 		// guarda el reporte de usuarios en un txt
