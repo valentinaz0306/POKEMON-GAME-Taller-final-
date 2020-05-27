@@ -590,7 +590,7 @@ public class Main extends PApplet {
 		}
 		
 		//aqui va la excepcion
-		/*if () {
+		if () {
 			
 			try {
 				throw new PokemonException();
@@ -598,10 +598,10 @@ public class Main extends PApplet {
 				// TODO Auto-generated catch block
 				// e.printStackTrace();
 				JOptionPane.showMessageDialog(null, e.getMessage());
-			}*/	
+			}	
 			
 		}
-	
+	}
 
 	public void keyPressed() {
 		if (key == ENTER) {

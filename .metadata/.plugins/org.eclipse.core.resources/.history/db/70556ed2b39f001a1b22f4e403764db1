@@ -527,21 +527,20 @@ public class Main extends PApplet {
 					btnfight = 1;
 				}
 				if ((mouseX > 945 && mouseX < 1080) && (mouseY > 553 && mouseY < 584)) {
-					if (vidaT < 55 | vidaP < 55 | vidaW < 55) {
-						logica.guardarPkmnTxt();
-					} else {
-						try {
-							throw new LifeException();
+					if(vidaT<55|vidaP<55|vidaW<55){
+					logica.guardarPkmnTxt();
+				} else {
+					try {
+						throw new LifeException();
 
-						} catch (LifeException e) {
-							// TODO Auto-generated catch block
-							// e.printStackTrace();
-							JOptionPane.showMessageDialog(null, e.getMessage());
-						}
-
+					} catch (LifeException e) {
+						// TODO Auto-generated catch block
+						// e.printStackTrace();
+						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
-				}
 
+				}}
+				
 				if ((mouseX > 758 && mouseX < 876) && (mouseY > 608 && mouseY < 641)) {
 					logica.loadPersonaje();
 					vidaT = logica.getTorchi().getVida();
@@ -588,20 +587,8 @@ public class Main extends PApplet {
 			}
 
 		}
-		
-		//aqui va la excepcion
-		/*if () {
-			
-			try {
-				throw new PokemonException();
-			} catch (PokemonException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
-				JOptionPane.showMessageDialog(null, e.getMessage());
-			}*/	
-			
-		}
-	
+
+	}
 
 	public void keyPressed() {
 		if (key == ENTER) {
@@ -636,12 +623,12 @@ public class Main extends PApplet {
 
 		}
 
-		if (key == 'i') {
+		if (key == 'a') {
 
 			saveStrings("data/reporte.txt", logica.guardarTxt());
 		}
 		// con s aparecen los usuarios que se han registrado
-		if (key == 'k') {
+		if (key == 's') {
 
 			logica.probar();
 		}
@@ -683,9 +670,7 @@ public class Main extends PApplet {
 
 		}
 
-		// movimiento del personaje
-
-		if (keyCode == UP) {
+		if (key == 'i') {
 			logica.changemovstate(Personaje.UP);
 			up = true;
 			left = false;
@@ -693,7 +678,7 @@ public class Main extends PApplet {
 			down = false;
 			still = false;
 		}
-		if (keyCode == LEFT) {
+		if (key == 'j') {
 			logica.changemovstate(Personaje.LEFT);
 			up = false;
 			left = true;
@@ -701,7 +686,7 @@ public class Main extends PApplet {
 			down = false;
 			still = false;
 		}
-		if (keyCode == DOWN) {
+		if (key == 'k') {
 			logica.changemovstate(Personaje.DOWN);
 			up = false;
 			left = false;
@@ -709,7 +694,7 @@ public class Main extends PApplet {
 			down = true;
 			still = false;
 		}
-		if (keyCode == RIGHT) {
+		if (key == 'l') {
 			logica.changemovstate(Personaje.RIGHT);
 			up = false;
 			left = false;
@@ -723,7 +708,7 @@ public class Main extends PApplet {
 	// cierra key
 
 	public void keyReleased() {
-		if (keyCode == UP) {
+		if (key == 'i') {
 			logica.changemovstate(Personaje.STILL);
 			up = false;
 			left = false;
@@ -731,7 +716,7 @@ public class Main extends PApplet {
 			down = false;
 			still = true;
 		}
-		if (keyCode == RIGHT) {
+		if (key == 'j') {
 			logica.changemovstate(Personaje.STILL);
 			up = false;
 			left = false;
@@ -739,7 +724,7 @@ public class Main extends PApplet {
 			down = false;
 			still = true;
 		}
-		if (keyCode == LEFT) {
+		if (key == 'k') {
 			logica.changemovstate(Personaje.STILL);
 			up = false;
 			left = false;
@@ -747,7 +732,7 @@ public class Main extends PApplet {
 			down = false;
 			still = true;
 		}
-		if (keyCode == DOWN) {
+		if (key == 'l') {
 			logica.changemovstate(Personaje.STILL);
 			up = false;
 			left = false;

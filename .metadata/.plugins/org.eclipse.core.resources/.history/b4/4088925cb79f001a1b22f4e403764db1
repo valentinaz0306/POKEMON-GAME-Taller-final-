@@ -588,20 +588,8 @@ public class Main extends PApplet {
 			}
 
 		}
-		
-		//aqui va la excepcion
-		/*if () {
-			
-			try {
-				throw new PokemonException();
-			} catch (PokemonException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
-				JOptionPane.showMessageDialog(null, e.getMessage());
-			}*/	
-			
-		}
-	
+
+	}
 
 	public void keyPressed() {
 		if (key == ENTER) {

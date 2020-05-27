@@ -589,6 +589,7 @@ public class Main extends PApplet {
 
 		}
 		
+		
 		//aqui va la excepcion
 		/*if () {
 			
