@@ -527,21 +527,20 @@ public class Main extends PApplet {
 					btnfight = 1;
 				}
 				if ((mouseX > 945 && mouseX < 1080) && (mouseY > 553 && mouseY < 584)) {
-					if (vidaT < 55 | vidaP < 55 | vidaW < 55) {
-						logica.guardarPkmnTxt();
-					} else {
-						try {
-							throw new LifeException();
+					if(vidaT<55|vidaP<55|vidaW<55){
+					logica.guardarPkmnTxt();
+				} else {
+					try {
+						throw new LifeException();
 
-						} catch (LifeException e) {
-							// TODO Auto-generated catch block
-							// e.printStackTrace();
-							JOptionPane.showMessageDialog(null, e.getMessage());
-						}
-
+					} catch (LifeException e) {
+						// TODO Auto-generated catch block
+						// e.printStackTrace();
+						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
-				}
 
+				}}
+				
 				if ((mouseX > 758 && mouseX < 876) && (mouseY > 608 && mouseY < 641)) {
 					logica.loadPersonaje();
 					vidaT = logica.getTorchi().getVida();
@@ -588,20 +587,8 @@ public class Main extends PApplet {
 			}
 
 		}
-		
-		//aqui va la excepcion
-		/*if () {
-			
-			try {
-				throw new PokemonException();
-			} catch (PokemonException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
-				JOptionPane.showMessageDialog(null, e.getMessage());
-			}*/	
-			
-		}
-	
+
+	}
 
 	public void keyPressed() {
 		if (key == ENTER) {
@@ -682,7 +669,7 @@ public class Main extends PApplet {
 			pantalla = 8;
 
 		}
-
+		
 		// movimiento del personaje
 
 		if (keyCode == UP) {
