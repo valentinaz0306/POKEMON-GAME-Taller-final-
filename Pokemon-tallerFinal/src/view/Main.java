@@ -333,6 +333,7 @@ public class Main extends PApplet {
 				vidaW = logica.getWater().getVida();
 				btnfight = 0;
 				pantalla = 6;
+				
 
 			}
 			paintcharacter();
@@ -372,7 +373,7 @@ public class Main extends PApplet {
 				text("Your pokemon", 785, 435);
 				fill(0, 255, 0);
 				noStroke();
-				rect(781, 448, vidaT, 20, 20);
+				rect(781, 448, 200, 20, 20);
 				fill(0);
 				textSize(20);
 				text("lvl" + logica.getTorchi().getNivel(), 1085, 468);
@@ -387,7 +388,7 @@ public class Main extends PApplet {
 				text("Your pokemon", 785, 435);
 				fill(0, 255, 0);
 				noStroke();
-				rect(781, 448, vidaP, 20, 20);
+				rect(781, 448, 200, 20, 20);
 				fill(0);
 				textSize(20);
 				text("lvl" + logica.getPlant().getNivel(), 1085, 468);
@@ -402,7 +403,7 @@ public class Main extends PApplet {
 				text("Your pokemon", 785, 435);
 				fill(0, 255, 0);
 				noStroke();
-				rect(781, 448, vidaW, 20, 20);
+				rect(781, 448, 200, 20, 20);
 				fill(0);
 				textSize(20);
 				text("lvl" + logica.getWater().getNivel(), 1085, 468);
@@ -765,10 +766,12 @@ public class Main extends PApplet {
 			if (btnfight == 0) {
 				if ((mouseX > 754 && mouseX < 884) && (mouseY > 550 && mouseY < 583)) {
 					btnfight = 1;
+					homemusic.stop();
 				}
 				if ((mouseX > 945 && mouseX < 1080) && (mouseY > 553 && mouseY < 584)) {
 					if (vidaT < 55 | vidaP < 55 | vidaW < 55) {
 						logica.guardarPkmnTxt();
+						homemusic.stop();
 					} else {
 						try {
 							throw new LifeException();
@@ -789,10 +792,12 @@ public class Main extends PApplet {
 					vidaW = logica.getWater().getVida();
 					btnfight = 0;
 					pantalla = 5;
+					homemusic.stop();
+					homemusic.stop();
+					homemusic.stop();
 					
-					fightmusic.stop();
-					homemusic.amp((float) 0.05);
-					homemusic.play();
+					
+					
 				}
 
 			}

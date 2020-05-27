@@ -89,9 +89,9 @@ public class Logica {
 
 	// Mothod to create the OBJECT Pokemon
 	public void loadPokemon() {
-		setTorchi(new Pokemon(persona.getFight(), "Torchi", 5, 200, 0, false));
-		setPlant(new Pokemon(persona.getFight(), "Plant", 5, 200, 0, false));
-		setWater(new Pokemon(persona.getFight(), "Water", 5, 200, 0, false));
+		setTorchi(new Pokemon(3, "Torchi", 5, 200, 0, false));
+		setPlant(new Pokemon(5, "Plant", 5, 200, 0, false));
+		setWater(new Pokemon(4, "Water", 5, 200, 0, false));
 
 	}
 
